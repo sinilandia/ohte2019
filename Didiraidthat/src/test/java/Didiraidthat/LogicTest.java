@@ -5,6 +5,8 @@
  */
 package Didiraidthat;
 
+import Didiraidthat.Raid;
+import Didiraidthat.Gym;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
