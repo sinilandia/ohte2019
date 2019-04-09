@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package didiraidthat;
+package Didiraidthat;
 
 import static org.junit.Assert.*;
 import org.junit.Before;

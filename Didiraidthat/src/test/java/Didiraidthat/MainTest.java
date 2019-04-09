@@ -1,5 +1,5 @@
 
-package didiraidthat;
+package Didiraidthat;
 
 import java.util.ArrayList;
 import org.junit.After;
