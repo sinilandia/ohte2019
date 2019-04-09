@@ -1,29 +1,58 @@
-# Ohten harjoituksia
+# Did I Raid That? 
+Keep tabs on your Pokemon Go raids! With this desktop application you can log raids, sign up for raids and see where you have raided as well as check which EX raids you're eligible to attend. 
 
-#### Mistä ohtessa on kysymys?
-[Linkki ohten kurssimateriaaliin.](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/)
+## Documentation
+[Instructions]()
+[Software requirements specification](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Srs.md)
+[Architecture]()
+[Tests]()
+[Timekeeping](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Timekeeping.md)
 
+## Releases
 
-###### As Linus Torvalds said:
-> *"Talk is cheap. Show me the code."*
+## Terminal commands
 
------------------------------
-### [Timekeeping](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Timekeeping.md)
------------------------------
+### Tests
+Execute tests by typing into the terminal
 
+```
+mvn test
+```
 
-### **Viikko 1**
+Test coverage report
 
-[gitlog.txt](https://github.com/sinilandia/ot_viikko1/blob/master/laskarit/gitlog.txt)
+```
+mvn jacoco:report
+```
 
-[komentorivi.txt](https://github.com/sinilandia/ot_viikko1/blob/master/laskarit/komentorivi.txt)
+View the test coverage report from _target/site/jacoco/index.html_
 
-### **Viikko 2**
+### Execute jar
 
-[testikattavuus.jpg](https://github.com/sinilandia/ot_viikko1/blob/master/laskarit/viikko2/testikattavuus_Unicafe.png)
+Command
 
-[Vaatimusmäärittely-dokumentti](https://github.com/sinilandia/ot_viikko1/blob/master/documentation/srs.md)
+```
+mvn package
+```
 
-### **Viikko 3**
-[Viikko 3](https://github.com/sinilandia/ot_viikko1/tree/master/laskarit/viikko3)
-Disclaimer: sovelluksen tiedostoissa GitHubissa esiintyy 2 kansiota: DidIRaidThat ja Didiraidthat. DidIRaidThatissa on vain pom.xml ja Didiraidthatissa on kaikki loput tiedostot. En saa näitä mitenkään yhdistettyä yhdeksi tiedostoksi, vaikka olen poistanut tiedostot koneelta kokonaan ja kloonannut repon GitHubista takaisin koneelle. Kun ryhmän vetäjät kokeilivat, heidän kloonattuaan reponi, ilmestyi heille 2 eri kansiota. Minulle ilmestyy vain 1. En osaa troubleshootaa tätä, mutta menen pajaan loppuviikosta ratkomaan ongelmaa.
+will create into the folder _target_ a jar file _Didiraidthat-1.0-SNAPSHOT.jar_
+
+### JavaDoc
+
+Create JavaDoc command
+
+```
+mvn javadoc:javadoc
+```
+
+View javadoc with your browser from the location _target/site/apidocs/index.html_
+
+### Checkstyle
+
+To execute audits in  [checkstyle.xml]() use the command
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+You can view the errors with your browser from the location _target/site/checkstyle.html_
