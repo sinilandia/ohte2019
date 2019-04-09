@@ -14,8 +14,6 @@ import java.util.Scanner;
  * @author siniliu
  */
 
-/**Testtestest**/
-
 
 
 public class Main {

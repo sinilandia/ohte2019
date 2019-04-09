@@ -29,7 +29,8 @@
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>Didiraidthat/ui/*</exclude>
+                        <exclude>Didiraidthat/Main.class</exclude>
+                        <exclude>Didiraidthat/Logic.class</exclude>
                     </excludes>
                 </configuration>  
                 <executions>
@@ -42,6 +43,5 @@
                 </executions>
             </plugin>  
         </plugins>
-    </build>
-    
+    </build>    
 </project>
