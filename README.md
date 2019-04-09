@@ -13,7 +13,7 @@ Keep tabs on your Pokemon Go raids! With this desktop application you can log ra
 [Timekeeping](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Timekeeping.md)
 
 ## Releases
-- - - 
+N/A
 
 ## Terminal commands
 
