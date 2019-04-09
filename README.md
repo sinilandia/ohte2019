@@ -8,7 +8,7 @@
 > *"Talk is cheap. Show me the code."*
 
 -----------------------------
-### [Timekeeping](https://github.com/sinilandia/ot_viikko1/blob/master/documentation/timekeeping.md)
+### [Timekeeping](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Timekeeping.md)
 -----------------------------
 
 
