@@ -6,7 +6,7 @@ Keep tabs on your Pokemon Go raids! With this desktop application you can log ra
 
 [Software requirements specification](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Srs.md)
 
-[Architecture]() N/A
+[Architecture](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Architecture.md)
 
 [Tests]() N/A
 
