@@ -10,5 +10,7 @@
 | 9.4.  | 1.0    | Added package structure. Changed package names to start with a small letter, per instructions. For some reason the change didn't reflect in Netbeans and once again this resulted in a naming issue. So had to change everything back and for now, live with incorrect package names. |  
 | 9.4.  | 2.5    | Drew package diagram. Added checkstyle (but didn't fix all the 100+ errors that the report gave me). |  
 | 13.4. | 1.0    | Added GitHub issues from settings, read theory and code for reference application [OtmTodoApp](https://github.com/mluukkai/OtmTodoApp).| 
-| total | 16.0 | | 
+| 14.4  | 1.0  | Trying to understand why you need new File in FileWriter constructor, e.g. FileWriter writer = new FileWriter(new File(file)) instead of FilewWriter writer = new FileWriter(file). I still don't know. |
+| 00.0  | 0.0  | N/A |
+| total | 17.0 | | 
 
