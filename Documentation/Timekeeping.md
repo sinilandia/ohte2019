@@ -14,5 +14,5 @@
 | 14.4  | 0.5  | Refactor and create classes Gym and Raid. |
 | 00.0  | 0.0  | N/A |
 
-| total | 17.0 | | 
+| total | 17.5 | | 
 
