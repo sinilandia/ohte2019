@@ -13,7 +13,7 @@ import domain.Gym;
  */
 public interface GymDao {
     
-    Gym create(Gym todo) throws Exception;
+    Gym create(Gym gym) throws Exception;
 
     List<Gym> getAll();
 

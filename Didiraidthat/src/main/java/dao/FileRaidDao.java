@@ -35,10 +35,9 @@ public class FileRaidDao implements RaidDao {
             while (reader.hasNextLine()) {
                 String[] parts = reader.nextLine().split(";");
                 int id = Integer.parseInt(parts[0]);
-                boolean done = Boolean.parseBoolean(parts[2]);  
                 Gym gym = gyms.getAll().stream().filter(g->g.getName().equals(parts[2])).findFirst().orElse(null);
                 LocalDate date = LocalDate.parse(parts[3]);
-                DateTimeFormatter parser = DateTimeFormatter.ofPattern("hh:mm a");
+                DateTimeFormatter parser = DateTimeFormatter.ofPattern("HH:mm");
                 LocalTime time = LocalTime.parse(parts[4], parser);
 
                 //Raid: id, level, gym, date, time, boolean raided (need to be changed to arraylist later?)

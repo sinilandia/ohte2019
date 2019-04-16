@@ -7,6 +7,7 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -21,11 +22,12 @@ public class Raid {
     private boolean raided;
     //add participants  and raid boss
 
-    public Raid(String level, Gym gym, LocalTime time) {
+    public Raid(String level, Gym gym, String hours, String minutes) {
         this.level = level;
         this.gym = gym;
         this.date = LocalDate.now();
-        this.time = time;
+        String timeAsString = hours + ":" + minutes; 
+        this.time = LocalTime.parse(timeAsString, DateTimeFormatter.ofPattern("HH:mm"));
         this.raided = false;
     }
 
