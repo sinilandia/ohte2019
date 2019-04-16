@@ -15,5 +15,6 @@
 | 16.6  | 0.5  | Researching more about FileWriter constructor and error handling. Got a reply in chat, now I know that you don't need a new File in FileWriter constructor.|
 | 16.6  | 2.5  |  Refactoring. Added jar-file generation. Added DAO classes. |
 | 16.6  | 2.0  |  Refactoring. Added RaidService and Raidui. |
-| total | 22.5 | | 
+| 16.6  | 0.5  |  Add skipped_files.xml for checkstyle. Fixed checkstyle errors. |
+| total | 23.0 | | 
 
