@@ -16,5 +16,6 @@
 | 16.6  | 2.5  |  Refactoring. Added jar-file generation. Added DAO classes. |
 | 16.6  | 2.0  |  Refactoring. Added RaidService and Raidui. |
 | 16.6  | 0.5  |  Add skipped_files.xml for checkstyle. Fixed checkstyle errors. |
-| total | 23.0 | | 
+| 16.6  | 2.0  |  Added stests. |
+| total | 25.0 | | 
 
