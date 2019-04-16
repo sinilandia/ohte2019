@@ -5,10 +5,19 @@
  */
 package dao;
 
+import java.util.List;
+import domain.Raid;
+
 /**
  *
  * @author siniliu
  */
-public class RaidDao {
-    
+public interface RaidDao {
+
+    Raid create(Raid raid) throws Exception;
+
+    List<Raid> getAll();
+
+  
+
 }

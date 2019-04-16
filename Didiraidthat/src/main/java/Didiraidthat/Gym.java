@@ -10,13 +10,20 @@ package Didiraidthat;
  * @author siniliu
  */
 public class Gym {
+    private int id;
     private String name;
-    //add boolean EX Raid Gym
+    private Boolean EX;
 
     public Gym(String name) {
         this.name = name;
     }
 
+    public Gym(int id, String name, Boolean EX) {
+        this.id = id;
+        this.name = name;
+        this.EX = EX;
+    }
+    
     public String getName() {
         return name;
     }

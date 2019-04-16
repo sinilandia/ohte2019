@@ -10,5 +10,9 @@ package domain;
  * @author siniliu
  */
 public class RaidService {
-    
+    public static void main(String[] args) {
+        
+   System.out.println("Hello world."); 
+
+    }
 }

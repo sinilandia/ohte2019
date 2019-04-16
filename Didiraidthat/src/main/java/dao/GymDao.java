@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 package dao;
+import java.util.List;
+import domain.Gym;
 
 /**
  *
  * @author siniliu
  */
-public class GymDao {
+public interface GymDao {
     
+    Gym create(Gym todo) throws Exception;
+
+    List<Gym> getAll();
+
 }

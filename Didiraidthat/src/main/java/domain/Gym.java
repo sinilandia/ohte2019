@@ -14,6 +14,12 @@ public class Gym {
         this.EX = EX;
     }
 
+    public Gym(int id, String name, boolean EX) {
+        this.id = id;
+        this.name = name;
+        this.EX = EX;
+    }
+
     public String getName() {
         return name;
     }

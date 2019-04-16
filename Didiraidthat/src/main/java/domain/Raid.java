@@ -21,12 +21,21 @@ public class Raid {
     private boolean raided;
     //add participants  and raid boss
 
-    public Raid(String level, Gym gym, LocalDate date, LocalTime time) {
+    public Raid(String level, Gym gym, LocalTime time) {
+        this.level = level;
+        this.gym = gym;
+        this.date = LocalDate.now();
+        this.time = time;
+        this.raided = false;
+    }
+
+    public Raid(int id, String level, Gym gym, LocalDate date, LocalTime time, boolean raided) {
+        this.id = id;
         this.level = level;
         this.gym = gym;
         this.date = date;
         this.time = time;
-        this.raided = false;
+        this.raided = raided;
     }
 
     public void setId(int id) {

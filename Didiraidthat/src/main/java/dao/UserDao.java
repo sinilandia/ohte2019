@@ -9,6 +9,6 @@ package dao;
  *
  * @author siniliu
  */
-public class UserDao {
+public interface UserDao {
     
 }
