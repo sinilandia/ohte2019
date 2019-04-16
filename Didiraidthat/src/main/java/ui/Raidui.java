@@ -47,7 +47,7 @@ public class Raidui {
         
         //add a new gym
         if (reply.equalsIgnoreCase("5")){
-            System.out.println("Name of gym?");
+            System.out.println("Name of the gym?");
             String name = userInput.next();
             System.out.println("Is the gym an EX gym? Yes/No");
             String ex = userInput.next();

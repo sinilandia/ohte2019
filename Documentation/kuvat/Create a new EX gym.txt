@@ -1,0 +1,15 @@
+title Create a new EX gym
+
+User->*UI: user starts Raidui
+UI -> UI: prints menu
+User->+UI: reply.equals("5")
+UI->User: print: "Name of the gym?"
+User->UI: reply: name
+UI->User: print: "Is the gym an EX gym? y/n"
+User->UI: reply: "yes"
+UI->+RaidService: createGym(name, true)
+RaidService->Gym: gym = new Gym(name, true)
+RaidService->+GymDao: create(gym)
+GymDao-->-RaidService: return gym
+RaidService-->-UI: return true
+UI->-User: print: "Added gym: name"
