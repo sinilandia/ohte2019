@@ -15,5 +15,5 @@
 | 16.6  | 0.5  | Researching more about FileWriter constructor and error handling. Got a reply in chat, now I know that you don't need a new File in FileWriter constructor.|
 | 16.6  | 2.5  |  Added jar-file generation. Added DAO classes. |
 
-| total | 17.5 | | 
+| total | 20.5 | | 
 
