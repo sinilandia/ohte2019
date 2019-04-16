@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import dao.GymDao;
 import dao.RaidDao;
 import java.time.LocalDate;
+import java.util.function.Function;
 
 /**
  * Application logic class
@@ -91,18 +92,18 @@ public class RaidService {
     
     //NB: now returning all EX Gyms where the user has raided
     
-    public List<Raid> getEXGyms() {
+    public List<Gym> getEXGyms() {
     //        if (loggedIn == null) {
     //            return new ArrayList<>();
     //        }
 
             LocalDate now = LocalDate.now();
             
-            return raidDao.getAll()
-                .stream()
-                .filter(t-> t.isRaided()==true)
-                .filter(t-> t.getGym().isEX()==true)
-                .collect(Collectors.toList());
+            //NB: how to get string name getName()?
+            return gymDao.getAll()
+                                .stream()
+                                .filter(t-> t.isEX()==true)       
+                                .collect(Collectors.toList());
         }
    
 }    
