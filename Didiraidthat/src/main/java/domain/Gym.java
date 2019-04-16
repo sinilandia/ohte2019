@@ -7,17 +7,17 @@ package domain;
 public class Gym {
     private int id;
     private String name;
-    private boolean EX;
+    private boolean ex;
 
-    public Gym(String name, boolean EX) {
+    public Gym(String name, boolean ex) {
         this.name = name;
-        this.EX = EX;
+        this.ex = ex;
     }
 
-    public Gym(int id, String name, boolean EX) {
+    public Gym(int id, String name, boolean ex) {
         this.id = id;
         this.name = name;
-        this.EX = EX;
+        this.ex = ex;
     }
 
     public String getName() {
@@ -28,8 +28,8 @@ public class Gym {
         return id;
     }
 
-    public boolean isEX() {
-        return EX;
+    public boolean isEx() {
+        return ex;
     }
     
     public void setId(int id) {
@@ -40,8 +40,8 @@ public class Gym {
         this.name = name;
     }
 
-    public void setEX(boolean EX) {
-        this.EX = EX;
+    public void setEx(boolean ex) {
+        this.ex = ex;
     }
 
     @Override

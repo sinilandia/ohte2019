@@ -30,8 +30,8 @@ public class FileGymDao implements GymDao {
             while (reader.hasNextLine()) {
                 String[] parts = reader.nextLine().split(";");
                 int id = Integer.parseInt(parts[0]);
-                boolean EX = Boolean.parseBoolean(parts[2]);
-                Gym gym = new Gym(id, parts[1], EX); //id, name, EX raid
+                boolean ex = Boolean.parseBoolean(parts[2]);
+                Gym gym = new Gym(id, parts[1], ex); //id, name, EX raid
                 gyms.add(gym);
             }
         } catch (Exception e) {
@@ -45,10 +45,10 @@ public class FileGymDao implements GymDao {
         return gyms.size() + 1;
     }
     
-    private void save() throws Exception{
+    private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Gym gym : gyms) {
-                writer.write(gym.getId() + ";" + gym.getName() + ";" + gym.isEX() + "\n");
+                writer.write(gym.getId() + ";" + gym.getName() + ";" + gym.isEx() + "\n");
             }
         }
     }   

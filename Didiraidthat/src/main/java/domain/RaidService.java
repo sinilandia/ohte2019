@@ -37,11 +37,11 @@ public class RaidService {
     * @param   EX true if the Gym is an EX Gym
     */
     
-    public boolean createGym(String name, boolean EX) {
-        Gym gym = new Gym(name, EX);
+    public boolean createGym(String name, boolean ex) {
+        Gym gym = new Gym(name, ex);
         try {   
             gymDao.create(gym);
-        } catch (Exception ex) {
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -79,7 +79,7 @@ public class RaidService {
           
         return raidDao.getAll()
             .stream()
-            .filter(t-> t.isRaided()==true)
+            .filter(t-> t.isRaided() == true)
             .collect(Collectors.toList());
     }
    
@@ -97,13 +97,13 @@ public class RaidService {
     //            return new ArrayList<>();
     //        }
 
-            LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.now();
             
             //NB: how to get string name getName()?
-            return gymDao.getAll()
-                                .stream()
-                                .filter(t-> t.isEX()==true)       
-                                .collect(Collectors.toList());
-        }
+        return gymDao.getAll()
+                    .stream()
+                    .filter(t-> t.isEx() == true)       
+                    .collect(Collectors.toList());
+    }
    
 }    

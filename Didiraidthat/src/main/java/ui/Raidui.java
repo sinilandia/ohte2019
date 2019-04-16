@@ -53,6 +53,7 @@ public class Raidui {
       Scanner userInput = new Scanner( System.in );
       String reply = "";
 
+      
       while (!reply.equalsIgnoreCase("x")){
         System.out.println("Menu:\n" + 
                 "4. View all EX gyms. \n"+
