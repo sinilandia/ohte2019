@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import domain.Raid;
@@ -51,17 +46,29 @@ public class FileRaidDao implements RaidDao {
         
     }
 
+    private int generateId() {
+        return raids.size() + 1;
+    }
+    
+    private void save() throws Exception {
+        try (FileWriter writer = new FileWriter(new File(file))) {
+            for (Raid raid : raids) {
+                writer.write(raid.getId() + ";" + raid.getLevel() + ";" + raid.getDate() 
+                         + ";" + raid.getTime() + ";" + raid.isRaided() + "\n");
+            }
+        }
+    } 
+    
     @Override
     public Raid create(Raid raid) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        raid.setId(generateId());
+        raids.add(raid);
+        save();
+        return raid;    
     }
 
     @Override
     public List<Raid> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return raids;
     }
-
-  
-    
-    
 }

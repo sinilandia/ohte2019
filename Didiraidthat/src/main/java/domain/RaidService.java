@@ -99,7 +99,7 @@ public class RaidService {
 
         LocalDate now = LocalDate.now();
             
-            //NB: how to get string name getName()?
+            //NB: how to get string name getName()? tried: map and filter but neither works
         return gymDao.getAll()
                     .stream()
                     .filter(t-> t.isEx() == true)       

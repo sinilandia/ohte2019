@@ -33,6 +33,8 @@
                         <exclude>Didiraidthat/Logic.class</exclude>
                         <exclude>Didiraidthat/ui</exclude>
                         <exclude>Didiraidthat/dao</exclude>
+                        <exclude>dao/*</exclude>
+                        <exclude>ui/*</exclude>
                     </excludes>
                 </configuration>  
                 <executions>

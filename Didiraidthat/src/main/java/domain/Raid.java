@@ -52,8 +52,8 @@ public class Raid {
         this.gym = gym;
     }
 
-    public void setRaided(boolean raided) {
-        this.raided = raided;
+    public void setRaided() {
+        this.raided = true;
     }
 
     public void setDate(LocalDate date) {
