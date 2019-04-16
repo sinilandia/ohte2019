@@ -13,7 +13,7 @@ Keep tabs on your Pokemon Go raids! With this desktop application you can log ra
 [Timekeeping](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Timekeeping.md)
 
 ## Releases
-N/A
+[Week 5 deadline](https://github.com/sinilandia/ohte2019/releases)
 
 ## Terminal commands
 
@@ -32,7 +32,7 @@ mvn jacoco:report
 
 View the test coverage report from _target/site/jacoco/index.html_
 
-### Execute jar
+### Generate executable jar file
 
 Command
 
