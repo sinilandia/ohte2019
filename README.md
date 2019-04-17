@@ -14,6 +14,7 @@ Keep tabs on your Pokemon Go raids! With this desktop application you can log ra
 
 ## Releases
 [All releases](https://github.com/sinilandia/ohte2019/releases)
+
 [Newest release: Week 5.1](https://github.com/sinilandia/ohte2019/releases/tag/week5.1)
 
 ## Terminal commands
