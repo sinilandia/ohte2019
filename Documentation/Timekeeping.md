@@ -12,8 +12,8 @@
 | 13.4. | 1.0    | Added GitHub issues from settings, read theory and code for reference application [OtmTodoApp](https://github.com/mluukkai/OtmTodoApp).| 
 | 14.4  | 1.0  | Trying to understand why you need new File in FileWriter constructor, e.g. FileWriter writer = new FileWriter(**new File(file)**) instead of FileWriter writer = new FileWriter(**file)**. I still don't know. |
 | 14.4  | 0.5  | Refactor and create classes Gym and Raid. |
-| 16.6  | 7.5  | Researching more about FileWriter constructor and error handling. Got a reply in Telegram. Now I know that you don't need a new File in FileWriter constructor. Refactoring. Added jar-file generation, DAO classes, RaidService class and Raidui class and skipped_files.xml for checkstyle. Fixed checkstyle errors. Added tests and a sequence diagram. Fixed package diagram. |
-
+| 16.4  | 7.5  | Researching more about FileWriter constructor and error handling. Got a reply in Telegram. Now I know that you don't need a new File in FileWriter constructor. Refactoring. Added jar-file generation, DAO classes, RaidService class and Raidui class and skipped_files.xml for checkstyle. Fixed checkstyle errors. Added tests and a sequence diagram. Fixed package diagram. |
+| 17.4  | 0.5  | Added a new release with a new jar file. I'd forgotten to delete the old version of my application, package Didiraidthat, from the first release jar file.|
 | 00.0  | 0.0  | N/A |
 
 | total | 25.0 | | 
