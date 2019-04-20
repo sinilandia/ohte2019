@@ -14,6 +14,7 @@
 | 14.4  | 0.5  | Refactor and create classes Gym and Raid. |
 | 16.4  | 7.5  | Researching more about FileWriter constructor and error handling. Got a reply in Telegram. Now I know that you don't need a new File in FileWriter constructor. Refactoring. Added jar-file generation, DAO classes, RaidService class and Raidui class and skipped_files.xml for checkstyle. Fixed checkstyle errors. Added tests and a sequence diagram. Fixed package diagram. |
 | 17.4  | 0.5  | Added a new release with a new jar file. I'd forgotten to delete the old version of my application, package Didiraidthat, from the first release jar file.|
+| 20.4. | 2.5  | Checking a fellow student's code and providing feedback and actionable improvements for her code Snake Game. |
 | 00.0  | 0.0  | N/A |
 
 | total | 25.0 | | 
