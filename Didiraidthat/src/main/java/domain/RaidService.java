@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import dao.GymDao;
-import dao.RaidDao;
 import java.time.LocalDate;
 import java.util.function.Function;
+import java.sql.*;
+import dao.GymDao;
+import dao.RaidDao;
 
 /**
  * Application logic class
@@ -105,5 +106,28 @@ public class RaidService {
                     .filter(t-> t.isEx() == true)       
                     .collect(Collectors.toList());
     }
+    
+    public String sqlTest() {       
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:testi.db");
+
+            PreparedStatement statement = connection.prepareStatement("SELECT 1");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println("Hei tietokantamaailma!");
+            } else {
+                System.out.println("Yhteyden muodostaminen epäonnistui.");
+            }
+        } catch (SQLException e) {
+           return e.toString();
+        }
+        
+        return "onnistui";
+        
+    }
+    
+    
    
 }    
