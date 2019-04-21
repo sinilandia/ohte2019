@@ -16,6 +16,7 @@
 | 17.4  | 0.5  | Added a new release with a new jar file. I'd forgotten to delete the old version of my application, package Didiraidthat, from the first release jar file.|
 | 20.4. | 2.5  | Checking a fellow student's code and providing feedback and actionable improvements for her code Snake Game. |
 | 21.4  | 1.75 | Added content for class User, UserDao and FileUserDao. Added [Xerial's SQLiteJDBC](https://github.com/xerial/sqlite-jdbc#using-sqlitejdbc-with-maven2) and tested it but doesn't work. Error: java.sql.SQLException: No suitable driver found for jdbc:sqlite:testi.db. Then added plugin "Netbeans SQLiteJDBC" into Netbeans but it didn't work either, same error.|
+| 21.4  | 0.15 | Fixed SQLiteJDBC -error. Apparently version 3.7.x doesn't work but 3.27.xx and 3.8.xx all work. |
 | 00.0  | 0.0  | N/A |
-| **total** | **26.75** | | 
+| **total** | **27.00** | | 
 
