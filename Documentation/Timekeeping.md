@@ -19,5 +19,5 @@
 | 21.4  | 0.15 | Fixed SQLiteJDBC -error. Apparently version 3.7.x doesn't work but 3.27.xx and 3.8.xx all work. |
 | 22.4  | 1.75 | Added database raid.db and a table Users into it. Now it is possible to add new users with username and find users by username. **Todo for later:** check for existing users when creating a new user to avoid duplicates.|
 | 00.0  | 0.0  | N/A |
-| **total** | **27.00** | | 
+| **total** | **28.75** | | 
 
