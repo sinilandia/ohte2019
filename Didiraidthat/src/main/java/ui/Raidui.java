@@ -25,6 +25,8 @@ public class Raidui {
       
       while (!reply.equalsIgnoreCase("x")){
         System.out.println("Menu:\n" + 
+                "1. Add new user. \n"+
+                "2. Find user. \n"+
                 "4. View all EX gyms. \n"+
                 "5. I want to add a gym. \n" +
                 "6. Test SQL \n" +
@@ -36,8 +38,10 @@ public class Raidui {
         String gymFile = "gymFile";
         String raidFile = "raidFile";
         FileGymDao gymDao = new FileGymDao(gymFile);
-        FileRaidDao raidDao = new FileRaidDao(raidFile, gymDao);       
-        RaidService service = new RaidService(gymDao, raidDao);
+        FileRaidDao raidDao = new FileRaidDao(raidFile, gymDao);
+        Database database = new Database("jdbc:sqlite:raid.db");
+        FileUserDao userDao = new FileUserDao(database);
+        RaidService service = new RaidService(gymDao, raidDao, userDao);
 
         reply = userInput.next();
         
@@ -61,8 +65,18 @@ public class Raidui {
         }
         
         //test SQL, 6
-        if (reply.equalsIgnoreCase("6")){
+        if (reply.equalsIgnoreCase("6")) {
             System.out.println(service.sqlTest());
+        }
+        
+        //add new user, 1
+        if (reply.equalsIgnoreCase("1")) {
+            System.out.println(service.addNewUser().toString());
+        }
+        
+        //find user, 2
+        if (reply.equalsIgnoreCase("2")) {
+            System.out.println(service.findUser().toString());
         }
      
       }

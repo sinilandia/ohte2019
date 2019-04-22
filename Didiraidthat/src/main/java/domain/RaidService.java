@@ -12,9 +12,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.util.function.Function;
+import java.util.Scanner;
 import java.sql.*;
 import dao.GymDao;
 import dao.RaidDao;
+import dao.UserDao;
 
 /**
  * Application logic class
@@ -23,11 +25,14 @@ public class RaidService {
     
     private GymDao gymDao;
     private RaidDao raidDao;
+    private UserDao userDao;
     //private User loggedIn;
     
-    public RaidService(GymDao gymDao, RaidDao raidDao) {
+    
+    public RaidService(GymDao gymDao, RaidDao raidDao, UserDao userDao) {
         this.gymDao = gymDao;
         this.raidDao = raidDao;
+        this.userDao = userDao;
     }
     
     
@@ -128,6 +133,34 @@ public class RaidService {
         
     }
     
+    public User addNewUser() {
+        Scanner userInput = new Scanner( System.in );
+        System.out.println("What's your username?");
+        String username = userInput.next().toString();
+        
+        try {
+            userDao.create(username);
+            User u = userDao.findByUsername(username);
+            return u;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public User findUser() {
+        Scanner userInput = new Scanner( System.in );
+        System.out.println("Who are you looking for?");
+        String username = userInput.next().toString();
+        
+        try {
+            User u = userDao.findByUsername(username);
+            return u;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
     
    
 }    

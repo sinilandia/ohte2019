@@ -12,10 +12,16 @@ import java.util.Objects;
  * @author siniliu
  */
 public class User {
+    private int id;
     private String username;
 
     public User(String username) {
         this.username = username;
+    }
+    
+    public User(String username, int id) {
+        this.username = username;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -26,6 +32,14 @@ public class User {
         this.username = username;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -42,6 +56,11 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Username: " + username + ", id: " + id + "\n";
     }
     
     

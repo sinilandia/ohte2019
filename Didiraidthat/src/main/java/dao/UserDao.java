@@ -7,16 +7,17 @@ package dao;
 
 import java.util.List;
 import domain.User;
+import java.sql.*;
 
 /**
  *
  * @author siniliu
  */
 public interface UserDao {
-    User create(User user) throws Exception;
+    User create(String username) throws SQLException;
 
-    User findByUsername(String username);
+    User findByUsername(String username) throws SQLException;
 
-    List<User> getAll();
+    List<User> getAll() throws SQLException;
 
 }
