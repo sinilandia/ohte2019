@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import domain.Gym;
+import domain.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 /**
@@ -19,51 +24,65 @@ import domain.Gym;
  */
 public class FileGymDao implements GymDao {
     
-    public List<Gym> gyms;
-    private String file;
-
-    public FileGymDao(String file) throws Exception {
-        gyms = new ArrayList<>();
-        this.file = file;
-        try {
-            Scanner reader = new Scanner(new File(file));
-            while (reader.hasNextLine()) {
-                String[] parts = reader.nextLine().split(";");
-                int id = Integer.parseInt(parts[0]);
-                boolean ex = Boolean.parseBoolean(parts[2]);
-                Gym gym = new Gym(id, parts[1], ex); //id, name, EX raid
-                gyms.add(gym);
-            }
-        } catch (Exception e) {
-            FileWriter writer = new FileWriter(new File(file));
-            writer.close();
+    private Database db;
+    
+    public FileGymDao(Database database) {
+        this.db = database;
+    }  
+    
+    @Override
+    public Gym create(Gym gym) throws SQLException {
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Gym (name, ex) VALUES (?, ?)");
+        stmt.setString(1, gym.getName());
+        stmt.setBoolean(2, gym.isEx());
+        stmt.executeUpdate();        
+        stmt.close();
+        conn.close();
+        
+        Gym g = findByGymName(gym.getName());
+        
+        return g;
+    }     
+    
+    @Override
+    public Gym findByGymName(String name) throws SQLException{
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Gym WHERE name = ?");
+        stmt.setString(1, name);
+        
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
         }
         
+        Gym g = new Gym(rs.getInt("id"), rs.getString("name"), rs.getBoolean("ex"));
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+        
+        return g;
     }
-    
-    private int generateId() {
-        return gyms.size() + 1;
-    }
-    
-    private void save() throws Exception {
-        try (FileWriter writer = new FileWriter(new File(file))) {
-            for (Gym gym : gyms) {
-                writer.write(gym.getId() + ";" + gym.getName() + ";" + gym.isEx() + "\n");
-            }
-        }
-    }   
-
+      
     @Override
-    public Gym create(Gym gym) throws Exception {
-        gym.setId(generateId());
-        gyms.add(gym);
-        save();
-        return gym;
-    }
+    public List<Gym> getAll() throws SQLException{
+        ArrayList gyms = new ArrayList();
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Gym");       
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            Gym g = new Gym(rs.getInt("id"), rs.getString("name"), rs.getBoolean("ex"));
+            gyms.add(g);
+        }       
+        
+        stmt.close();
+        rs.close();
+        conn.close();
 
-    @Override
-    public List<Gym> getAll() {
-        return gyms;
+        return gyms;   
     }
-
+     
 }

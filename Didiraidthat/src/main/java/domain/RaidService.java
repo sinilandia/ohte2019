@@ -43,14 +43,14 @@ public class RaidService {
     * @param   EX true if the Gym is an EX Gym
     */
     
-    public boolean createGym(String name, boolean ex) {
+    public Gym createGym(String name, boolean ex) {
         Gym gym = new Gym(name, ex);
         try {   
-            gymDao.create(gym);
+            Gym g = gymDao.create(gym);
+            return g;
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return true;
     }
     
     /**
@@ -98,18 +98,26 @@ public class RaidService {
     
     //NB: now returning all EX Gyms where the user has raided
     
-    public List<Gym> getEXGyms() {
+    public String getAllGyms() {
     //        if (loggedIn == null) {
     //            return new ArrayList<>();
     //        }
 
-        LocalDate now = LocalDate.now();
+        //LocalDate now = LocalDate.now();
             
-            //NB: how to get string name getName()? tried: map and filter but neither works
-        return gymDao.getAll()
-                    .stream()
-                    .filter(t-> t.isEx() == true)       
-                    .collect(Collectors.toList());
+        String text = "";
+        
+        try {
+            List gyms = gymDao.getAll();
+            for (int i = 0; i < gyms.size(); i++) {               
+                text += gyms.get(i).toString();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+              
+        return text;
     }
     
     public User addNewUser() {
@@ -148,12 +156,12 @@ public class RaidService {
             List users = userDao.getAll();
             for (int i = 0; i < users.size(); i++) {
                 text += users.get(i).toString();
-            }
-            return text;
+            }           
         } catch (Exception e) {
             System.out.println(e);
             return null;
         }
+        return text;
         
     }
     

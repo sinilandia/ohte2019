@@ -6,6 +6,8 @@
 package dao;
 import java.util.List;
 import domain.Gym;
+import domain.User;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,8 +15,10 @@ import domain.Gym;
  */
 public interface GymDao {
     
-    Gym create(Gym gym) throws Exception;
+    Gym create(Gym gym) throws SQLException;
+    
+    Gym findByGymName(String name) throws SQLException;
 
-    List<Gym> getAll();
+    List<Gym> getAll() throws SQLException;
 
 }

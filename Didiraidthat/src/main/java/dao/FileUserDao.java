@@ -23,47 +23,7 @@ public class FileUserDao implements UserDao {
     
     public FileUserDao(Database database) {
         this.db = database;
-    }    
-      
-    @Override
-    public List<User> getAll() throws SQLException{
-        ArrayList users = new ArrayList();
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()) {
-            User u = new User(rs.getString("username"), rs.getInt("id"));
-            users.add(u);
-        }       
-        
-        stmt.close();
-        rs.close();
-        conn.close();
-
-        return users;   
-    }
-    
-    @Override
-    public User findByUsername(String username) throws SQLException{
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
-        stmt.setString(1, username);
-        
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
-            return null;
-        }
-        
-        User user = new User(username, rs.getInt("id"));
-        
-        stmt.close();
-        rs.close();
-        conn.close();
-        
-        return user;
-    }
+    }  
     
     @Override
     public User create(String username) throws SQLException {
@@ -77,5 +37,45 @@ public class FileUserDao implements UserDao {
         User u = findByUsername(username);
         
         return u;
-    }       
+    }     
+    
+    @Override
+    public User findByUsername(String username) throws SQLException{
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
+        stmt.setString(1, username);
+        
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+        
+        User user = new User(rs.getInt("id"), username);
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+        
+        return user;
+    }
+      
+    @Override
+    public List<User> getAll() throws SQLException{
+        ArrayList users = new ArrayList();
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {
+            User u = new User(rs.getInt("id"), rs.getString("username"));
+            users.add(u);
+        }       
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+
+        return users;   
+    }
 }

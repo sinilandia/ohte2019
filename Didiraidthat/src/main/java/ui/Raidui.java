@@ -28,42 +28,23 @@ public class Raidui {
                 "1. Add new user. \n"+
                 "2. Find user. \n"+
                 "3. Find all users. \n" +
-                "4. View all EX gyms. \n"+
+                "4. View all gyms. \n"+
                 "5. I want to add a gym. \n" +
                 "Type in x to quit.\n"+
                 "What is your choice?"
-        );  
+        );  //missing find a gym by name -method missing from RaidService
         
         //create RaidService 
         String gymFile = "gymFile";
         String raidFile = "raidFile";
-        FileGymDao gymDao = new FileGymDao(gymFile);
-        FileRaidDao raidDao = new FileRaidDao(raidFile, gymDao);
         Database database = new Database("jdbc:sqlite:raid.db");
+        FileGymDao gymDao = new FileGymDao(database);
+        FileRaidDao raidDao = new FileRaidDao(raidFile, gymDao);       
         FileUserDao userDao = new FileUserDao(database);
         RaidService service = new RaidService(gymDao, raidDao, userDao);
 
         reply = userInput.next();
-        
-        //show all EX Gyms
-        if (reply.equalsIgnoreCase("4")){
-            System.out.println(service.getEXGyms());
-        }
-        
-        //add a new gym
-        if (reply.equalsIgnoreCase("5")){
-            System.out.println("Name of the gym?");
-            String name = userInput.next();
-            System.out.println("Is the gym an EX gym? Yes/No");
-            String ex = userInput.next();
-            boolean exGym = false;
-            if (ex.equalsIgnoreCase("yes")) {
-                exGym = true;
-            }
-            service.createGym(name, exGym);
-            System.out.println("Added gym: " + name);           
-        }
-        
+
         //add new user, 1
         if (reply.equalsIgnoreCase("1")) {
             System.out.println(service.addNewUser().toString());
@@ -78,7 +59,24 @@ public class Raidui {
         if (reply.equalsIgnoreCase("3")) {
             System.out.println(service.getAllUsers());
         }
-     
+        
+        //find all Gyms, 4
+        if (reply.equalsIgnoreCase("4")){
+            System.out.println(service.getAllGyms());
+        }
+        
+        //add a new gym, 5
+        if (reply.equalsIgnoreCase("5")){
+            System.out.println("Name of the gym?");
+            String name = userInput.next(); //spaces cut the word - need to fix
+            System.out.println("Is the gym an EX gym? Yes/No");
+            String ex = userInput.next();
+            boolean exGym = false;
+            if (ex.equalsIgnoreCase("yes")) {
+                exGym = true;
+            }
+            System.out.println("Added new gym: \n" + service.createGym(name, exGym).toString());           
+        }   
       }
       
       System.out.println("Goodbye."); 

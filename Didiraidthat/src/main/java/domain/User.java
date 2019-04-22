@@ -19,7 +19,7 @@ public class User {
         this.username = username;
     }
     
-    public User(String username, int id) {
+    public User(int id, String username) {
         this.username = username;
         this.id = id;
     }

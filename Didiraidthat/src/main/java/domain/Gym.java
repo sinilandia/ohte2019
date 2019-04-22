@@ -59,9 +59,9 @@ public class Gym {
         }
         return true;
     }
-            
-           
-    
- 
-    
+
+    @Override
+    public String toString() {
+        return  "Name: " + name + "\tid: " + id + "\tEX: " + ex + "\n";
+    }
 }
