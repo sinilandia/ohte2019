@@ -27,9 +27,9 @@ public class Raidui {
         System.out.println("Menu:\n" + 
                 "1. Add new user. \n"+
                 "2. Find user. \n"+
+                "3. Find all users. \n" +
                 "4. View all EX gyms. \n"+
                 "5. I want to add a gym. \n" +
-                "6. Test SQL \n" +
                 "Type in x to quit.\n"+
                 "What is your choice?"
         );  
@@ -64,11 +64,6 @@ public class Raidui {
             System.out.println("Added gym: " + name);           
         }
         
-        //test SQL, 6
-        if (reply.equalsIgnoreCase("6")) {
-            System.out.println(service.sqlTest());
-        }
-        
         //add new user, 1
         if (reply.equalsIgnoreCase("1")) {
             System.out.println(service.addNewUser().toString());
@@ -77,6 +72,11 @@ public class Raidui {
         //find user, 2
         if (reply.equalsIgnoreCase("2")) {
             System.out.println(service.findUser().toString());
+        }
+        
+        //find all users in a list, 3
+        if (reply.equalsIgnoreCase("3")) {
+            System.out.println(service.getAllUsers());
         }
      
       }

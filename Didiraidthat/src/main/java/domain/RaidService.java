@@ -112,27 +112,6 @@ public class RaidService {
                     .collect(Collectors.toList());
     }
     
-    public String sqlTest() {       
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:testi.db");
-
-            PreparedStatement statement = connection.prepareStatement("SELECT 1");
-
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                System.out.println("Hei tietokantamaailma!");
-            } else {
-                System.out.println("Yhteyden muodostaminen epäonnistui.");
-            }
-        } catch (SQLException e) {
-           return e.toString();
-        }
-        
-        return "onnistui";
-        
-    }
-    
     public User addNewUser() {
         Scanner userInput = new Scanner( System.in );
         System.out.println("What's your username?");
@@ -160,6 +139,22 @@ public class RaidService {
             System.out.println(e);
             return null;
         }
+    }
+    
+    public String getAllUsers() {
+        String text = "All the users: \n";
+        
+        try {
+            List users = userDao.getAll();
+            for (int i = 0; i < users.size(); i++) {
+                text += users.get(i).toString();
+            }
+            return text;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        
     }
     
    

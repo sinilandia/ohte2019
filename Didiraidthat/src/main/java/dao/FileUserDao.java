@@ -40,8 +40,7 @@ public class FileUserDao implements UserDao {
         stmt.close();
         rs.close();
         conn.close();
-        
-        //returns list of users > need loop over for usernames + id
+
         return users;   
     }
     
@@ -64,12 +63,6 @@ public class FileUserDao implements UserDao {
         conn.close();
         
         return user;
-        
-//        return users.stream()
-//            .filter(u->u.getUsername()
-//            .equals(username))
-//            .findFirst()
-//            .orElse(null);
     }
     
     @Override

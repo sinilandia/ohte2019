@@ -60,7 +60,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Username: " + username + ", id: " + id + "\n";
+        return "Username: " + username + "\t id: " + id + "\n";
     }
     
     
