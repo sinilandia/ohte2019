@@ -93,7 +93,7 @@ public class Raidui {
             System.out.println("Start time in minutes? mm");
             String timeMinutes = userInput.next();
             
-            //service.createRaid(gymName, level, timeHours, timeMinutes);
+            service.createRaid(gymName, level, timeHours, timeMinutes);
            
             System.out.println("Raid added: raid info");
         }

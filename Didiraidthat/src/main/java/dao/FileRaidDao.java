@@ -30,7 +30,7 @@ public class FileRaidDao implements RaidDao {
     @Override
     public boolean create(Raid raid) throws Exception {
         Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raid (gymId, "
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raid (gym_id, "
                 + "level, date, time ) VALUES (?, ?, ?, ?)");
         stmt.setInt(1, raid.getGym().getId());
         stmt.setString(2, raid.getLevel());
