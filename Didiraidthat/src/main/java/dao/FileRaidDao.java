@@ -34,8 +34,8 @@ public class FileRaidDao implements RaidDao {
                 + "level, date, time ) VALUES (?, ?, ?, ?)");
         stmt.setInt(1, raid.getGym().getId());
         stmt.setString(2, raid.getLevel());
-        stmt.setDate(3, java.sql.Date.valueOf(raid.getDate()));
-        stmt.setTime(4, java.sql.Time.valueOf(raid.getTime()));
+        stmt.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
+        stmt.setTime(4, java.sql.Time.valueOf(java.time.LocalTime.now()));
         stmt.executeUpdate();        
         stmt.close();
         conn.close();
