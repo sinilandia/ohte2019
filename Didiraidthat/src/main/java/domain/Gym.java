@@ -31,10 +31,6 @@ public class Gym {
     public boolean isEx() {
         return ex;
     }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;

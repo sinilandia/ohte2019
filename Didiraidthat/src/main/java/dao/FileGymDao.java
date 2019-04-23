@@ -46,10 +46,31 @@ public class FileGymDao implements GymDao {
     }     
     
     @Override
-    public Gym findByGymName(String name) throws SQLException{
+    public Gym findByGymName(String name) throws SQLException {
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Gym WHERE name = ?");
         stmt.setString(1, name);
+        
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+        
+        Gym g = new Gym(rs.getInt("id"), rs.getString("name"), rs.getBoolean("ex"));
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+        
+        return g;
+    }
+    
+    @Override
+    public Gym findbyGymId(int id) throws SQLException {
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Gym WHERE id = ?");
+        stmt.setInt(1, id);
         
         ResultSet rs = stmt.executeQuery();
         boolean hasOne = rs.next();

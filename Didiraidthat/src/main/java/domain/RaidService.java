@@ -56,20 +56,31 @@ public class RaidService {
     /**
     * Create a new raid
     *
+    * @param   gymName is the name of Gym where raid will take place
     * @param   level of the raid
-    * @param   gym is the raid location
     * @param   hours in string, when raid starts
     * @param   minutes in string, when raid starts
     */
     
-    public boolean createRaid(String level, Gym gym, String hours, String minutes) {
-        Raid raid = new Raid(level, gym, hours, minutes);
-        try {   
+    public boolean createRaid(String gymName, String level, String hours, String minutes) {       
+        try {
+            Gym gym = gymDao.findByGymName(gymName);
+            Raid raid = new Raid(gym, level, hours, minutes);
             raidDao.create(raid);
-        } catch (Exception ex) {
+        } catch (Exception e) {
+            System.out.println(e);
             return false;
-        }
+        }       
         return true;
+        
+        
+//        Raid raid = new Raid(gym, level, hours, minutes);
+//        try {   
+//            raidDao.create(raid);
+//        } catch (Exception ex) {
+//            return false;
+//        }
+//        return true;
     }
     
     /**
@@ -78,16 +89,16 @@ public class RaidService {
     * @return raids which the user has attended
     */
     
-    public List<Raid> getRaided() {
-//        if (loggedIn == null) {
-//            return new ArrayList<>();
-//        }
-          
-        return raidDao.getAll()
-            .stream()
-            .filter(t-> t.isRaided() == true)
-            .collect(Collectors.toList());
-    }
+//    public List<Raid> getRaided() {
+////        if (loggedIn == null) {
+////            return new ArrayList<>();
+////        }
+//          
+//        return raidDao.getAll()
+//            .stream()
+//            .filter(t-> t.isRaided() == true)
+//            .collect(Collectors.toList());
+//    }
    
 
     /**
@@ -163,6 +174,21 @@ public class RaidService {
         }
         return text;
         
+    }
+    
+    /**
+    * Get gym with its name, case sensitive maybe?
+    * @param gymName name of the gym in String
+    * @return Gym object
+    */
+    public Gym getGym(String gymName) {
+        try {
+            Gym gym = gymDao.findByGymName(gymName);
+            return gym;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
     
    

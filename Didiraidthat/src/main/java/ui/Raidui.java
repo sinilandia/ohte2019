@@ -21,6 +21,7 @@ public class Raidui {
 
       //UI
       Scanner userInput = new Scanner( System.in );
+      userInput.useDelimiter(System.getProperty("line.separator"));
       String reply = "";
       
       while (!reply.equalsIgnoreCase("x")){
@@ -29,7 +30,10 @@ public class Raidui {
                 "2. Find user. \n"+
                 "3. Find all users. \n" +
                 "4. View all gyms. \n"+
-                "5. I want to add a gym. \n" +
+                "5. Add a gym. \n" +
+                "6. Add a new raid. \n" +
+                "7. Sign up for a raid. \n" +
+                "8. Find all raids. \n" +
                 "Type in x to quit.\n"+
                 "What is your choice?"
         );  //missing find a gym by name -method missing from RaidService
@@ -39,7 +43,7 @@ public class Raidui {
         String raidFile = "raidFile";
         Database database = new Database("jdbc:sqlite:raid.db");
         FileGymDao gymDao = new FileGymDao(database);
-        FileRaidDao raidDao = new FileRaidDao(raidFile, gymDao);       
+        FileRaidDao raidDao = new FileRaidDao(database);       
         FileUserDao userDao = new FileUserDao(database);
         RaidService service = new RaidService(gymDao, raidDao, userDao);
 
@@ -76,7 +80,28 @@ public class Raidui {
                 exGym = true;
             }
             System.out.println("Added new gym: \n" + service.createGym(name, exGym).toString());           
-        }   
+        }  
+        
+        //add a new raid, 6
+        if (reply.equalsIgnoreCase("6")){
+            System.out.println("Name of the gym?");
+            String gymName = userInput.next(); 
+            System.out.println("Raid level? 1-5 or EX");
+            String level = userInput.next();
+            System.out.println("Start time in hours? HH");
+            String timeHours = userInput.next();
+            System.out.println("Start time in minutes? mm");
+            String timeMinutes = userInput.next();
+            
+            //service.createRaid(gymName, level, timeHours, timeMinutes);
+           
+            System.out.println("Raid added: raid info");
+        }
+        
+        //find all raids, 8
+        if (reply.equalsIgnoreCase("8")){
+            System.out.println(raidDao.getAll());           
+        }
       }
       
       System.out.println("Goodbye."); 

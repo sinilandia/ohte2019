@@ -7,6 +7,7 @@ package dao;
 
 import java.util.List;
 import domain.Raid;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,10 +15,8 @@ import domain.Raid;
  */
 public interface RaidDao {
 
-    Raid create(Raid raid) throws Exception;
+    boolean create(Raid raid) throws Exception;
 
-    List<Raid> getAll();
-
-  
-
+    List<Raid> getAll() throws SQLException;
+    
 }

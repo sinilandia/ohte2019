@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,29 +16,25 @@ import java.time.format.DateTimeFormatter;
  */
 public class Raid {
     private int id;
-    private String level;
     private Gym gym;
+    private String level;
     private LocalDate date;
     private LocalTime time;
-    private boolean raided;
-    //add participants  and raid boss
 
-    public Raid(String level, Gym gym, String hours, String minutes) {
+    public Raid(Gym gym, String level, String hours, String minutes) {
         this.level = level;
         this.gym = gym;
         this.date = LocalDate.now();
-        String timeAsString = hours + ":" + minutes; 
-        this.time = LocalTime.parse(timeAsString, DateTimeFormatter.ofPattern("HH:mm"));
-        this.raided = false;
+        String timeAsString = hours + ":" + minutes + ":00"; 
+        this.time = LocalTime.parse(timeAsString, DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
-    public Raid(int id, String level, Gym gym, LocalDate date, LocalTime time, boolean raided) {
+    public Raid(int id, Gym gym, String level, LocalDate date, LocalTime time) {
         this.id = id;
         this.level = level;
         this.gym = gym;
         this.date = date;
         this.time = time;
-        this.raided = raided;
     }
 
     public void setId(int id) {
@@ -50,10 +47,6 @@ public class Raid {
 
     public void setGym(Gym gym) {
         this.gym = gym;
-    }
-
-    public void setRaided() {
-        this.raided = true;
     }
 
     public void setDate(LocalDate date) {
@@ -84,10 +77,6 @@ public class Raid {
         return time;
     }
 
-    public boolean isRaided() {
-        return raided;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -105,9 +94,10 @@ public class Raid {
         }
         return true;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Raid id: " + id + "\tgym: " + gym + "\tlevel: " + level + "\t" 
+                + date + "\t" + time.format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
 }
