@@ -2,7 +2,7 @@
 Keep tabs on your Pokemon Go raids! With this desktop application you can log raids, sign up for raids and see where you have raided as well as check which EX raids you're eligible to attend. 
 
 ## Documentation
-[Instructions]() N/A
+[Instructions](https://github.com/sinilandia/ohte2019/blob/master/Documentation/instructions.md) 
 
 [Software requirements specification](https://github.com/sinilandia/ohte2019/blob/master/Documentation/Srs.md)
 
