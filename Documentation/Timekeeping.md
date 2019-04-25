@@ -19,6 +19,7 @@
 | 21.4  | 0.15 | Fixed SQLiteJDBC -error. Apparently version 3.7.x doesn't work but 3.27.xx and 3.8.xx all work. |
 | 22.4  | 3.00 | Added database raid.db and a table Users into it. Now it is possible to add new users with username, find users by username and find all users. **Todo for later:** check for existing users when creating a new user to avoid duplicates. Fix user input when there's spaces, now spaces cut the name.|
 | 23.4  | 3.5  | Added createRaid() and getAll() raids but I'm having trouble with converting Java LocalDate and LocalTime into corresponding SQL formats. Hence, it is possible to create raids with jibberish dates and times, but fetching all raids encounters parsing error with both date and time formats. |
+| 25.4. | 1.5  | Created drafts of Architecture.md and Instructions.md and continued Javadoc. |
 | 00.0  | 0.0  | N/A |
-| **total** | **33.50** | | 
+| **total** | **35.00** | | 
 
