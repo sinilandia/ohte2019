@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.util.ArrayList;
@@ -40,7 +35,9 @@ public class RaidService {
     * Create a new gym
     *
     * @param   name of the Gym
-    * @param   EX true if the Gym is an EX Gym
+    * @param   ex true if the Gym is an EX Gym
+    * 
+    * @return  created Gym
     */
     
     public Gym createGym(String name, boolean ex) {
@@ -60,6 +57,8 @@ public class RaidService {
     * @param   level of the raid
     * @param   hours in string, when raid starts
     * @param   minutes in string, when raid starts
+    * 
+    * @return true if Raid was created
     */
     
     public boolean createRaid(String gymName, String level, String hours, String minutes) {       
@@ -102,7 +101,7 @@ public class RaidService {
    
 
     /**
-    * Fetch all gyms where the user is eligible for an EX raid from the past 2 weeks
+    * Atm fetches all gyms, future: fetches all gyms where the user is eligible for an EX Raid
     * 
     * @return EX gyms where the user has raided in the past 2 weeks
     */
@@ -131,12 +130,18 @@ public class RaidService {
         return text;
     }
     
+    /**
+    * Create a new User
+    * @return  created User
+    */
+    
     public User addNewUser() {
         Scanner userInput = new Scanner( System.in );
         System.out.println("What's your username?");
         String username = userInput.next().toString();
         
         try {
+            //add: check for existing User
             userDao.create(username);
             User u = userDao.findByUsername(username);
             return u;
@@ -146,6 +151,10 @@ public class RaidService {
         }
     }
     
+    /**
+    * Find a user by username
+    * @return  found User or null
+    */
     public User findUser() {
         Scanner userInput = new Scanner( System.in );
         System.out.println("Who are you looking for?");
@@ -159,6 +168,11 @@ public class RaidService {
             return null;
         }
     }
+    
+    /**
+    * Find all Users 
+    * @return  found Users in string or null
+    */
     
     public String getAllUsers() {
         String text = "All the users: \n";

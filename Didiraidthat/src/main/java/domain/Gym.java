@@ -1,8 +1,7 @@
 package domain;
 
 /**
- *
- * @author siniliu
+ * Java class for Gym
  */
 public class Gym {
     private int id;
