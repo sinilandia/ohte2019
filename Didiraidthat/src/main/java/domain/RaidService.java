@@ -141,7 +141,7 @@ public class RaidService {
     */
     
     public User addNewUser() {
-        Scanner userInput = new Scanner( System.in );
+        Scanner userInput = new Scanner(System.in);
         System.out.println("What's your username?");
         String username = userInput.next().toString();
         
@@ -161,7 +161,7 @@ public class RaidService {
     * @return  found User or null
     */
     public User findUser() {
-        Scanner userInput = new Scanner( System.in );
+        Scanner userInput = new Scanner(System.in);
         System.out.println("Who are you looking for?");
         String username = userInput.next().toString();
         

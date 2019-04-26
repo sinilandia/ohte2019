@@ -1,29 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package dao;
+package domain;
 
-import java.io.File;
-import java.io.FileWriter;
+import dao.Database;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.sql.*;
-import domain.User;
+import dao.UserDao;
 
-/**
- *
- * @author siniliu
- */
-public class FileUserDao implements UserDao {
+
+public class FakeUserDao implements UserDao {
     
-    private Database db;
+    private FakeDatabase db;
     
-    public FileUserDao(Database database) {
-        this.db = database;
-    }  
+    public FakeUserDao(FakeDatabase database) {
+                this.db = database;
+    }
     
     @Override
     public User create(String username) throws SQLException {
@@ -40,7 +30,7 @@ public class FileUserDao implements UserDao {
     }     
     
     @Override
-    public User findByUsername(String username) throws SQLException {
+    public User findByUsername(String username) throws SQLException{
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
         stmt.setString(1, username);
@@ -61,7 +51,7 @@ public class FileUserDao implements UserDao {
     }
       
     @Override
-    public List<User> getAll() throws SQLException {
+    public List<User> getAll() throws SQLException{
         ArrayList users = new ArrayList();
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
@@ -78,4 +68,5 @@ public class FileUserDao implements UserDao {
 
         return users;   
     }
+    
 }

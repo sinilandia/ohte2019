@@ -34,8 +34,6 @@
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>Didiraidthat/Main.class</exclude>
-                        <exclude>Didiraidthat/Logic.class</exclude>
                         <exclude>Didiraidthat/ui</exclude>
                         <exclude>Didiraidthat/dao</exclude>
                         <exclude>dao/*</exclude>

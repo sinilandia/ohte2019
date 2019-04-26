@@ -88,7 +88,7 @@ public class FileGymDao implements GymDao {
     }
       
     @Override
-    public List<Gym> getAll() throws SQLException{
+    public List<Gym> getAll() throws SQLException {
         ArrayList gyms = new ArrayList();
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Gym");       
