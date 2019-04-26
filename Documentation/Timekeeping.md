@@ -21,6 +21,7 @@
 | 23.4  | 3.5  | Added createRaid() and getAll() raids but I'm having trouble with converting Java LocalDate and LocalTime into corresponding SQL formats. Hence, it is possible to create raids with jibberish dates and times, but fetching all raids encounters parsing error with both date and time formats. |
 | 25.4. | 1.5  | Created drafts of Architecture.md and Instructions.md and continued Javadoc. |
 | 26.4  | 1.0  | Fixed java-sql date problem. My colleague introduced me to a new concept: epoch date. Turns out nothing was wrong, it was just in epoch date. |
+| 26.4  | 3.0  | Added some tests. Had major troubles. RaidServiceUserTest somewhat works but it's not testing RaidService, which it's supposed to do, but instead it tests User-class. |
 | 00.0  | 0.0  | N/A |
 | **total** | **36.00** | | 
 
