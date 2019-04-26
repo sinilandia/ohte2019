@@ -23,7 +23,12 @@ public class RaidService {
     private UserDao userDao;
     //private User loggedIn;
     
-    
+    /**
+     *
+     * @param gymDao
+     * @param raidDao
+     * @param userDao
+     */
     public RaidService(GymDao gymDao, RaidDao raidDao, UserDao userDao) {
         this.gymDao = gymDao;
         this.raidDao = raidDao;

@@ -92,6 +92,6 @@ public class Raid {
     @Override
     public String toString() {
         return "Raid id: " + id + "\tgym: " + gym + "\tlevel: " + level + "\t" 
-                + date + "\t" + time.format(DateTimeFormatter.ofPattern("HH:mm"));
+                + date + "\t" + time.format(DateTimeFormatter.ofPattern("HH:mm")) + "\n";
     }
 }

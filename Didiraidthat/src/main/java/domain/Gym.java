@@ -57,6 +57,6 @@ public class Gym {
 
     @Override
     public String toString() {
-        return  "Name: " + name + "\tid: " + id + "\tEX: " + ex + "\n";
+        return  "Name: " + name + "\tid: " + id + "\tEX: " + ex;
     }
 }

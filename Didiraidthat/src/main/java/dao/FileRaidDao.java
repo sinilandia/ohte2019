@@ -9,7 +9,6 @@ import java.util.Scanner;
 import domain.Gym;
 import java.sql.*;
 import java.text.SimpleDateFormat;  
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 //import domain.User;
@@ -34,8 +33,8 @@ public class FileRaidDao implements RaidDao {
                 + "level, date, time ) VALUES (?, ?, ?, ?)");
         stmt.setInt(1, raid.getGym().getId());
         stmt.setString(2, raid.getLevel());
-        stmt.setDate(3, Date.valueOf(java.time.LocalDate.now()));
-        stmt.setTime(4, Time.valueOf(java.time.LocalTime.now()));
+        stmt.setDate(3, Date.valueOf(raid.getDate()));
+        stmt.setTime(4, Time.valueOf(raid.getTime()));
         stmt.executeUpdate();        
         stmt.close();
         conn.close();
@@ -47,7 +46,7 @@ public class FileRaidDao implements RaidDao {
     public List<Raid> getAll() throws SQLException {
         ArrayList raids = new ArrayList();
         Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid");       
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid order by id");       
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()) {

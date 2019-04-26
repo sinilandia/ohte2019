@@ -12,6 +12,11 @@ import java.util.Scanner;
  */
 public class Raidui {
     
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
       //UI
