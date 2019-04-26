@@ -23,5 +23,5 @@
 | 26.4  | 1.0  | Fixed java-sql date problem. My colleague introduced me to a new concept: epoch date. Turns out nothing was wrong, it was just in epoch date. |
 | 26.4  | 3.0  | Added some tests. Had major troubles. RaidServiceUserTest somewhat works but it's not testing RaidService, which it's supposed to do, but instead it tests User-class. |
 | 00.0  | 0.0  | N/A |
-| **total** | **36.00** | | 
+| **total** | **40.00** | | 
 
