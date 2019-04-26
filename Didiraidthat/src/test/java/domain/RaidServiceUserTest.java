@@ -71,7 +71,4 @@ public class RaidServiceUserTest {
         User u = userDao.findByUsername("eka");
         assertEquals("eka", u.getUsername());
     }
-    
-    
-  
 }
