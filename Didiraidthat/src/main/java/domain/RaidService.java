@@ -163,7 +163,7 @@ public class RaidService {
     public User findUser() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Who are you looking for?");
-        String username = userInput.next().toString();
+        String username = userInput.next();
         
         try {
             User u = userDao.findByUsername(username);

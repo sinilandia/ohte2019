@@ -11,15 +11,10 @@ import java.sql.*;
 import java.text.SimpleDateFormat;  
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-//import domain.User;
 
-/**
- *
- * @author siniliu
- */
 public class FileRaidDao implements RaidDao {
     private Database db;
-    GymDao gymDao;
+    private GymDao gymDao;
     
     public FileRaidDao(Database database) {
         this.db = database;

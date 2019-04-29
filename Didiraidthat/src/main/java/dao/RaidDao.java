@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public interface RaidDao {
 
     boolean create(Raid raid) throws Exception;
-
+    
     List<Raid> getAll() throws SQLException;
     
 }
