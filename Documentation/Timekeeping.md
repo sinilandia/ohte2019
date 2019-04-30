@@ -23,8 +23,7 @@
 | 26.4  | 1.0  | Fixed java-sql date problem. My colleague introduced me to a new concept: epoch date. Turns out nothing was wrong, it was just in epoch date. |
 | 26.4  | 3.0  | Added some tests. Had major troubles. RaidServiceUserTest somewhat works but it's not testing RaidService, which it's supposed to do, but instead it tests User-class. |
 | 29.4  | 1.0  | Add FileRaidUserDao for new features, such as user can sign up for a raid and user can find out all the raids s/he's been to. |
-| 30.4  | 0.75 | Add feature to find user's raids with SQL table RaidUser. |
-| 30.4  | 0.15 | Add feature to find user's gyms. |
+| 30.4  | 2.0 | Add feature to find user's raids with SQL table RaidUser. Add feature to find user's gyms. Learn about javafx from [ohja course](https://ohjelmointi-19.mooc.fi/osa-12). |
 | 00.0  | 0.0  | N/A |
-| **total** | **41.00** | | 
+| **total** | **43.00** | | 
 
