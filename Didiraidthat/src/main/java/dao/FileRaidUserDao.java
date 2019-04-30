@@ -1,5 +1,6 @@
 package dao;
 
+import domain.Gym;
 import domain.Raid;
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,5 +50,18 @@ public class FileRaidUserDao {
         conn.close();
         
         return usersRaids;
+    }
+    
+    public List<Gym> findUsersGyms(int userId) throws Exception {
+        
+        List<Gym> usersGyms = new ArrayList();
+        List<Raid> usersRaids = findUsersRaids(userId);
+        
+        for (int i = 0; i < usersRaids.size(); i++) {
+            Gym gym = usersRaids.get(i).getGym();
+            usersGyms.add(gym);
+        }
+        
+        return usersGyms;
     }
 }

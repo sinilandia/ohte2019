@@ -35,6 +35,7 @@ public class Raidui {
                 "7. Sign up for a raid. \n" +
                 "8. Find all raids. \n" +
                 "9. Find users raids. \n" +
+                "11. Fins users gyms. \n" +
                 "Type in x to quit.\n"+
                 "What is your choice?"
         );  //missing find a gym by name -method missing from RaidService
@@ -103,9 +104,14 @@ public class Raidui {
             System.out.println(raidDao.getAll());           
         }
         
-        //find all raids, 9
+        //find all user's raids, 9
         if (reply.equalsIgnoreCase("9")){
             System.out.println(raidUserDao.findUsersRaids(2));           
+        }
+        
+        //find all user's gyms, 11
+        if (reply.equalsIgnoreCase("11")){
+            System.out.println(raidUserDao.findUsersGyms(2));           
         }
       }
       
