@@ -34,17 +34,17 @@ public class Raidui {
                 "6. Add a new raid. \n" +
                 "7. Sign up for a raid. \n" +
                 "8. Find all raids. \n" +
+                "9. Find users raids. \n" +
                 "Type in x to quit.\n"+
                 "What is your choice?"
         );  //missing find a gym by name -method missing from RaidService
         
         //create RaidService 
-        String gymFile = "gymFile";
-        String raidFile = "raidFile";
         Database database = new Database("jdbc:sqlite:raid.db");
         FileGymDao gymDao = new FileGymDao(database);
         FileRaidDao raidDao = new FileRaidDao(database);       
         FileUserDao userDao = new FileUserDao(database);
+        FileRaidUserDao raidUserDao = new FileRaidUserDao(database, raidDao, userDao);
         RaidService service = new RaidService(gymDao, raidDao, userDao);
 
         reply = userInput.next();
@@ -101,6 +101,11 @@ public class Raidui {
         //find all raids, 8
         if (reply.equalsIgnoreCase("8")){
             System.out.println(raidDao.getAll());           
+        }
+        
+        //find all raids, 9
+        if (reply.equalsIgnoreCase("9")){
+            System.out.println(raidUserDao.findUsersRaids(2));           
         }
       }
       

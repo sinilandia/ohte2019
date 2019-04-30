@@ -17,6 +17,8 @@ public interface RaidDao {
 
     boolean create(Raid raid) throws Exception;
     
+    Raid findRaidById(int raidId) throws Exception;
+    
     List<Raid> getAll() throws SQLException;
     
 }

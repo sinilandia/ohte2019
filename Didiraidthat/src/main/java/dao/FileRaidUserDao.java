@@ -1,10 +1,7 @@
 package dao;
 
 import domain.Raid;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.Time;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +32,22 @@ public class FileRaidUserDao {
   
     public List<Raid> findUsersRaids(int userId) throws Exception {
         List<Raid> usersRaids = new ArrayList();
-        //usersId > RaidUser: raid_id > raidDao.findRaidById().collectors collect to list
         
+        Connection conn = db.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT raid_id FROM RaidUser WHERE user_id = ?");   
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
         
+        while (rs.next()) {
+            int raidId = rs.getInt("raid_id");
+            Raid raid = raidDao.findRaidById(raidId);
+            usersRaids.add(raid);          
+        }       
         
+        stmt.close();
+        rs.close();
+        conn.close();
         
-        return null;
+        return usersRaids;
     }
 }
