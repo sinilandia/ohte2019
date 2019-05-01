@@ -1,5 +1,6 @@
 package domain;
 
+import dao.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,19 +10,17 @@ import java.time.LocalDate;
 import java.util.function.Function;
 import java.util.Scanner;
 import java.sql.*;
-import dao.GymDao;
-import dao.RaidDao;
-import dao.UserDao;
 
 /**
  * Application logic class
  */
 public class RaidService {
     
+    private Database db;
     private GymDao gymDao;
     private RaidDao raidDao;
     private UserDao userDao;
-    //private User loggedIn;
+    private User loggedIn;
     
     /**
      *
@@ -29,11 +28,18 @@ public class RaidService {
      * @param raidDao
      * @param userDao
      */
-    public RaidService(GymDao gymDao, RaidDao raidDao, UserDao userDao) {
-        this.gymDao = gymDao;
-        this.raidDao = raidDao;
-        this.userDao = userDao;
-    }
+    
+    public RaidService() {
+        try {     
+            this.db = new Database("jdbc:sqlite:raid.db");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RaidService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.gymDao = new FileGymDao(db);
+        this.raidDao = new FileRaidDao(db);
+        this.userDao = new FileUserDao(db);
+        this.loggedIn = null;
+    }   
     
     
     /**
@@ -137,41 +143,36 @@ public class RaidService {
     
     /**
     * Create a new User
-    * @return  created User
+    * @return  true, if successful
     */
     
-    public User addNewUser() {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("What's your username?");
-        String username = userInput.next().toString();
-        
+    public boolean addNewUser(String username) { 
         try {
             //add: check for existing User
             userDao.create(username);
             User u = userDao.findByUsername(username);
-            return u;
+            return true;
         } catch (Exception e) {
             System.out.println(e);
-            return null;
+            return false;
         }
     }
     
     /**
     * Find a user by username
-    * @return  found User or null
+    * @return  true if user exists
     */
-    public User findUser() {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Who are you looking for?");
-        String username = userInput.next();
-        
+    public boolean login(String username) {  
         try {
-            User u = userDao.findByUsername(username);
-            return u;
+            this.loggedIn = userDao.findByUsername(username);
+            if (loggedIn == null) {
+            return false;
+            }
         } catch (Exception e) {
             System.out.println(e);
-            return null;
+            return false;
         }
+        return true;
     }
     
     /**
