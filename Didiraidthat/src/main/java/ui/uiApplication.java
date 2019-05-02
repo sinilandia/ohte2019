@@ -1,6 +1,12 @@
 package ui;
 
+import domain.Gym;
 import domain.RaidService;
+import domain.Raid;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.*;
@@ -24,12 +30,41 @@ public class uiApplication extends Application {
     private Scene createRaidScene;
     private Scene myRaidsScene;
     
-    Label menuLabel;
+    private Label menuLabel;
+    private VBox raidNodes;
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         this.raidService = new RaidService();
         this.menuLabel = new Label();
+    }
+    
+    public Node createRaidNode(Raid raid) {
+        HBox hbox = new HBox(10);
+        Label label  = new Label(raid.toString());
+//        label.setMinHeight(28);
+//        Button button = new Button("Sign up");
+//        button.setOnAction(e->{
+//            raidService.signUpForRaid(raid.getId());
+//            redrawActiveRaids();
+//        }
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        hbox.setPadding(new Insets(5,5,5,5));
+        
+        hbox.getChildren().addAll(label, spacer); //add button
+        return hbox;
+    }
+    
+    public void redrawActiveRaids() {
+        //raidNodes.getChildren().clear();      
+        List<Raid> allRaids = raidService.getRaided(); //why is this giving me an empty list?
+        Gym g = new Gym (10, "Supergym", true);
+        Raid r =  new Raid(12, g, "5", LocalDate.now(), LocalTime.now());
+        allRaids.add(r);
+        allRaids.forEach(raid ->{
+            raidNodes.getChildren().add(createRaidNode(raid));
+        }); 
     }
     
     @Override
@@ -53,10 +88,8 @@ public class uiApplication extends Application {
             menuLabel.setText("Welcome, " + username);
             if ( raidService.login(username) ){
                 loginMessage.setText("");           
-                //primaryStage.setScene(signUpForRaidScene);  
-                usernameInput.setText("");
-                loginMessage.setText("yay logged in!");
-                loginMessage.setTextFill(Color.BLACK);
+                primaryStage.setScene(signUpForRaidScene);  
+                usernameInput.setText("");               
             } else {
                 loginMessage.setText("player does not exist");
                 loginMessage.setTextFill(Color.RED);
@@ -77,16 +110,33 @@ public class uiApplication extends Application {
         loginPane.getChildren().addAll(loginMessage, inputPane, loginButton, createButton);       
         
         loginScene = new Scene(loginPane, 300, 250);    
-   
-        // new createNewUserScene
-        //add scene components here
         
         
-        // main scene       
-        //ScrollPane todoScollbar = new ScrollPane();       
+        // new signUpForRaidScene 
+        BorderPane layout = new BorderPane();
+        //menubar
+        Button signUpButton = new Button("Sign up for a raid");
+        Button createRaidButton = new Button("Create raid");
+        Button myRaidsButton = new Button("My Raids");
+        HBox menubar = new HBox(10);
+        menubar.setPadding(new Insets(20, 20, 20, 20));
+        menubar.setSpacing(10);
+        menubar.getChildren().addAll(signUpButton, createRaidButton, myRaidsButton);
+        layout.setTop(menubar);
+        //active raids
+        raidNodes = new VBox(10);
+        raidNodes.setMaxWidth(500);
+        raidNodes.setMaxHeight(350);
+        redrawActiveRaids();
+        
+        ScrollPane raidScrollbar = new ScrollPane();  
+        raidScrollbar.setContent(raidNodes);
+        layout.setCenter(raidScrollbar);
+        
+        signUpForRaidScene = new Scene(layout, 500, 400);
         
         
-        // seutp primary stage
+        // setup primary stage
         
         primaryStage.setTitle("Did I Raid That?");
         primaryStage.setScene(loginScene);

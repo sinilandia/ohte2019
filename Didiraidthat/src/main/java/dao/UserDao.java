@@ -7,8 +7,8 @@ import java.sql.*;
 public interface UserDao {
     User create(String username) throws SQLException;
 
-    User findByUsername(String username) throws SQLException;
+    User findByUsername(String username);
 
-    List<User> getAll() throws SQLException;
+    List<User> getAll();
 
 }

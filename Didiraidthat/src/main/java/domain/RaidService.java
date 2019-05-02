@@ -99,16 +99,18 @@ public class RaidService {
     * @return raids which the user has attended
     */
     
-//    public List<Raid> getRaided() {
-////        if (loggedIn == null) {
-////            return new ArrayList<>();
-////        }
-//          
-//        return raidDao.getAll()
-//            .stream()
-//            .filter(t-> t.isRaided() == true)
-//            .collect(Collectors.toList());
-//    }
+    public List<Raid> getRaided() {
+        if (loggedIn == null) {
+            return new ArrayList<>();
+        }
+          
+        try {
+            return raidDao.getAll(); //returns all raids when it should return user's raids
+        } catch (SQLException ex) {
+            Logger.getLogger(RaidService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
    
 
     /**
@@ -143,6 +145,7 @@ public class RaidService {
     
     /**
     * Create a new User
+    * @param username as string
     * @return  true, if successful
     */
     
@@ -160,16 +163,13 @@ public class RaidService {
     
     /**
     * Find a user by username
+    * @param username as String
     * @return  true if user exists
     */
-    public boolean login(String username) {  
-        try {
-            this.loggedIn = userDao.findByUsername(username);
-            if (loggedIn == null) {
-            return false;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+    public boolean login(String username) {       
+        User u = userDao.findByUsername(username);
+        this.loggedIn = u;        
+        if (loggedIn == null) {
             return false;
         }
         return true;

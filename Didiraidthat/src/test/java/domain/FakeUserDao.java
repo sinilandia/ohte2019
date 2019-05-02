@@ -30,43 +30,52 @@ public class FakeUserDao implements UserDao {
     }     
     
     @Override
-    public User findByUsername(String username) throws SQLException{
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
-        stmt.setString(1, username);
-        
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
+    public User findByUsername(String username){
+        try {
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+            boolean hasOne = rs.next();
+            if (!hasOne) {
+                return null;
+            }
+
+            User user = new User(rs.getInt("id"), username);
+
+            stmt.close();
+            rs.close();
+            conn.close();
+
+            return user;
+        } catch (Exception e) {
             return null;
         }
-        
-        User user = new User(rs.getInt("id"), username);
-        
-        stmt.close();
-        rs.close();
-        conn.close();
-        
-        return user;
     }
       
     @Override
-    public List<User> getAll() throws SQLException{
+    public List<User> getAll(){
         ArrayList users = new ArrayList();
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()) {
-            User u = new User(rs.getInt("id"), rs.getString("username"));
-            users.add(u);
-        }       
-        
-        stmt.close();
-        rs.close();
-        conn.close();
+        try {
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
+            ResultSet rs = stmt.executeQuery();
 
-        return users;   
+            while (rs.next()) {
+                User u = new User(rs.getInt("id"), rs.getString("username"));
+                users.add(u);
+            }       
+
+            stmt.close();
+            rs.close();
+            conn.close();
+
+            return users;   
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
     
 }

@@ -1,10 +1,7 @@
 package dao;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.sql.*;
 import domain.User;
 
@@ -17,7 +14,7 @@ public class FileUserDao implements UserDao {
     }  
     
     @Override
-    public User create(String username) throws SQLException {
+    public User create(String username) throws SQLException {       
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO User (username) VALUES (?)");
         stmt.setString(1, username);        
@@ -31,29 +28,36 @@ public class FileUserDao implements UserDao {
     }     
     
     @Override
-    public User findByUsername(String username) throws SQLException {
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
-        stmt.setString(1, username);
-        
-        ResultSet rs = stmt.executeQuery();
-        boolean hasOne = rs.next();
-        if (!hasOne) {
-            return null;
+    public User findByUsername(String username) {
+        try {
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT id FROM User WHERE username = ?");
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+            boolean hasOne = rs.next();
+            if (!hasOne) {
+                return null;
+            }
+
+            User user = new User(rs.getInt("id"), username);
+
+            stmt.close();
+            rs.close();
+            conn.close();            
+            return user;
+            
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        
-        User user = new User(rs.getInt("id"), username);
-        
-        stmt.close();
-        rs.close();
-        conn.close();
-        
-        return user;
+        return null;
     }
       
     @Override
-    public List<User> getAll() throws SQLException {
+    public List<User> getAll() {
         ArrayList users = new ArrayList();
+        
+        try {
         Connection conn = db.getConnection();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
         ResultSet rs = stmt.executeQuery();
@@ -67,6 +71,10 @@ public class FileUserDao implements UserDao {
         rs.close();
         conn.close();
 
-        return users;   
+        return users;  
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 }
