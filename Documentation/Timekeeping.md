@@ -25,7 +25,7 @@
 | 29.4  | 1.0  | Add FileRaidUserDao for new features, such as user can sign up for a raid and user can find out all the raids s/he's been to. |
 | 30.4  | 2.0  | Add feature to find user's raids with SQL table RaidUser. Add feature to find user's gyms. Learn about javafx from [ohja course](https://ohjelmointi-19.mooc.fi/osa-12). |
 | 1.5   | 2.15 | Added javafx graphical ui for logging in and creating a new user, _uiApplication_ class. |
-| 2.5   | 2.0  | Created a new scene for displaying active raids that the user can sign up for. Should display all raids at this point but for some reason it returns an empty ArrayList or thinks that the loggedin user is null. |
+| 2.5   | 2.5  | Created a new scene for displaying active raids that the user can sign up for. Should display all raids at this point but for some reason it returns an empty ArrayList or thinks that the loggedin user is null. Fixed it, I'd forgotten to call redrawActiveRaids() method.|
 | 00.0  | 0.0  | N/A |
-| **total** | **45.15** | | 
+| **total** | **47.75** | | 
 
