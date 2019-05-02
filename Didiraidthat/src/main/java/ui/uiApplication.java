@@ -57,11 +57,8 @@ public class uiApplication extends Application {
     }
     
     public void redrawActiveRaids() {
-        //raidNodes.getChildren().clear();      
-        List<Raid> allRaids = raidService.getRaided(); //why is this giving me an empty list?
-        Gym g = new Gym (10, "Supergym", true);
-        Raid r =  new Raid(12, g, "5", LocalDate.now(), LocalTime.now());
-        allRaids.add(r);
+        raidNodes.getChildren().clear();      
+        List<Raid> allRaids = raidService.getRaided();
         allRaids.forEach(raid ->{
             raidNodes.getChildren().add(createRaidNode(raid));
         }); 
@@ -89,7 +86,8 @@ public class uiApplication extends Application {
             if ( raidService.login(username) ){
                 loginMessage.setText("");           
                 primaryStage.setScene(signUpForRaidScene);  
-                usernameInput.setText("");               
+                usernameInput.setText(""); 
+                redrawActiveRaids();
             } else {
                 loginMessage.setText("player does not exist");
                 loginMessage.setTextFill(Color.RED);

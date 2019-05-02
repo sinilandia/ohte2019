@@ -101,6 +101,7 @@ public class RaidService {
     
     public List<Raid> getRaided() {
         if (loggedIn == null) {
+            System.out.println("palauttaa tyhjän listan");
             return new ArrayList<>();
         }
           
@@ -167,11 +168,11 @@ public class RaidService {
     * @return  true if user exists
     */
     public boolean login(String username) {       
-        User u = userDao.findByUsername(username);
-        this.loggedIn = u;        
-        if (loggedIn == null) {
+        User u = userDao.findByUsername(username);          
+        if (u == null) {
             return false;
         }
+        loggedIn = u; 
         return true;
     }
     
