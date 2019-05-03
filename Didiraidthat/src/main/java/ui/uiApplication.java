@@ -42,8 +42,8 @@ public class uiApplication extends Application {
     public Node createRaidNode(Raid raid) {
         HBox hbox = new HBox(10);
         Label label  = new Label(raid.toString());
-//        label.setMinHeight(28);
-//        Button button = new Button("Sign up");
+        label.setMinHeight(90);
+        Button button = new Button("Sign up");
 //        button.setOnAction(e->{
 //            raidService.signUpForRaid(raid.getId());
 //            redrawActiveRaids();

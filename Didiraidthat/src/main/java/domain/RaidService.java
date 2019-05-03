@@ -101,7 +101,6 @@ public class RaidService {
     
     public List<Raid> getRaided() {
         if (loggedIn == null) {
-            System.out.println("palauttaa tyhjän listan");
             return new ArrayList<>();
         }
           
