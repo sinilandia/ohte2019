@@ -26,6 +26,7 @@
 | 30.4  | 2.0  | Add feature to find user's raids with SQL table RaidUser. Add feature to find user's gyms. Learn about javafx from [ohja course](https://ohjelmointi-19.mooc.fi/osa-12). |
 | 1.5   | 2.15 | Added javafx graphical ui for logging in and creating a new user, _uiApplication_ class. |
 | 2.5   | 2.5  | Created a new scene for displaying active raids that the user can sign up for. Should display all raids at this point but for some reason it returns an empty ArrayList or thinks that the loggedin user is null. Fixed it, I'd forgotten to call redrawActiveRaids() method.|
+| 3.5   | 0.15 | Designed how Raid Nodes are showed in the application. Now it looks clearer. |
 | 00.0  | 0.0  | N/A |
 | **total** | **47.75** | | 
 
