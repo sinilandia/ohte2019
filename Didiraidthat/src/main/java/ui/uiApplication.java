@@ -44,22 +44,22 @@ public class uiApplication extends Application {
         Label label  = new Label(raid.toString());
         label.setMinHeight(90);
         Button button = new Button("Sign up");
-//        button.setOnAction(e->{
-//            raidService.signUpForRaid(raid.getId());
-//            redrawActiveRaids();
-//        }
+        button.setOnAction(e->{
+            raidService.signUpForRaid(raid.getId());
+            redrawActiveRaids();
+        });
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         hbox.setPadding(new Insets(5,5,5,5));
         
-        hbox.getChildren().addAll(label, spacer); //add button
+        hbox.getChildren().addAll(label, spacer, button);
         return hbox;
     }
     
     public void redrawActiveRaids() {
         raidNodes.getChildren().clear();      
-        List<Raid> allRaids = raidService.getRaided();
-        allRaids.forEach(raid ->{
+        List<Raid> allRaids = raidService.findUsersRaids();
+        allRaids.forEach(raid -> {
             raidNodes.getChildren().add(createRaidNode(raid));
         }); 
     }
@@ -125,7 +125,6 @@ public class uiApplication extends Application {
         raidNodes = new VBox(10);
         raidNodes.setMaxWidth(500);
         raidNodes.setMaxHeight(350);
-        redrawActiveRaids();
         
         ScrollPane raidScrollbar = new ScrollPane();  
         raidScrollbar.setContent(raidNodes);

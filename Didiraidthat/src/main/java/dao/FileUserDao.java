@@ -58,20 +58,20 @@ public class FileUserDao implements UserDao {
         ArrayList users = new ArrayList();
         
         try {
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
-        ResultSet rs = stmt.executeQuery();
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User");       
+            ResultSet rs = stmt.executeQuery();
         
-        while (rs.next()) {
-            User u = new User(rs.getInt("id"), rs.getString("username"));
-            users.add(u);
-        }       
+            while (rs.next()) {
+                User u = new User(rs.getInt("id"), rs.getString("username"));
+                users.add(u);
+            }       
         
-        stmt.close();
-        rs.close();
-        conn.close();
+            stmt.close();
+            rs.close();
+            conn.close();
 
-        return users;  
+            return users;  
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -38,24 +38,28 @@ public class FileRaidDao implements RaidDao {
     }
     
     @Override
-    public Raid findRaidById(int raidId) throws SQLException {
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid WHERE id = ?"); 
-        stmt.setInt(1, raidId);
-        ResultSet rs = stmt.executeQuery();
+    public Raid findRaidById(int raidId) {
+        try {
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid WHERE id = ?"); 
+            stmt.setInt(1, raidId);
+            ResultSet rs = stmt.executeQuery();
 
-        //if-else: doesn't exist > return null;
-        
-        int gymId = rs.getInt("gym_id");
-        Gym gym = gymDao.findbyGymId(gymId);
-        
-        Raid raid = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
-                    rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
-        stmt.close();
-        rs.close();
-        conn.close();
-        
-        return raid;
+            //if-else: doesn't exist > return null;
+
+            int gymId = rs.getInt("gym_id");
+            Gym gym = gymDao.findbyGymId(gymId);
+
+            Raid raid = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
+                        rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
+            stmt.close();
+            rs.close();
+            conn.close();
+
+            return raid;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

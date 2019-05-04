@@ -20,6 +20,7 @@ public class RaidService {
     private GymDao gymDao;
     private RaidDao raidDao;
     private UserDao userDao;
+    private RaidUserDao raidUserDao;
     private User loggedIn;
     
     /**
@@ -38,6 +39,7 @@ public class RaidService {
         this.gymDao = new FileGymDao(db);
         this.raidDao = new FileRaidDao(db);
         this.userDao = new FileUserDao(db);
+        this.raidUserDao = new FileRaidUserDao(db, raidDao);
         this.loggedIn = null;
     }   
     
@@ -94,9 +96,9 @@ public class RaidService {
     }
     
     /**
-    * Fetch all raids that the user has attended
+    * Fetch all raids
     * 
-    * @return raids which the user has attended
+    * @return all raids in the database 
     */
     
     public List<Raid> getRaided() {
@@ -105,7 +107,7 @@ public class RaidService {
         }
           
         try {
-            return raidDao.getAll(); //returns all raids when it should return user's raids
+            return raidDao.getAll(); 
         } catch (SQLException ex) {
             Logger.getLogger(RaidService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,6 +212,35 @@ public class RaidService {
             return null;
         }
     }
+    
+    /**
+    * Get user's raids with user id
+    * @return list of user's raids
+    */
+    public List<Raid> findUsersRaids() {
+        List<Integer> usersRaidsId = raidUserDao.findUsersRaids(loggedIn.getId());
+        //should return raids from past 2weeks
+        
+        List<Raid> usersRaids = new ArrayList<>();
+        for (int i = 0; i < usersRaidsId.size(); i++) {
+            int raidId = usersRaidsId.get(i);
+            Raid raid = raidDao.findRaidById(raidId);
+            usersRaids.add(raid);           
+        }
+        
+        return usersRaids;
+    }
+    
+    public boolean signUpForRaid(int raidId) {
+        if (raidUserDao.create(raidId, loggedIn.getId())) {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
+    
     
    
 }    
