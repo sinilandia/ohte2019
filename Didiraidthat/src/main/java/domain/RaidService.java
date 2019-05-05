@@ -58,7 +58,8 @@ public class RaidService {
         Gym gym = new Gym(name, ex);
         try {   
             Gym g = gymDao.create(gym);
-            return g;
+            g = gymDao.findByGymName(name);
+            return g; 
         } catch (Exception e) {
             return null;
         }
@@ -68,6 +69,7 @@ public class RaidService {
     * Create a new raid
     *
     * @param   gymName is the name of Gym where raid will take place
+    * @param   ex tells whether the gym is an EX gym or not 
     * @param   level of the raid
     * @param   hours in string, when raid starts
     * @param   minutes in string, when raid starts
@@ -75,13 +77,20 @@ public class RaidService {
     * @return true if Raid was created
     */
     
-    public boolean createRaid(String gymName, String level, String hours, String minutes) {       
-        try {
+    public boolean createRaid(String gymName, String ex, String level, String hours, String minutes) {       
+        boolean exGym = true;
+        System.out.println(exGym);
+        try {  
             Gym gym = gymDao.findByGymName(gymName);
+            if (gym==null) {
+                if (ex.equals("No")) {
+                    exGym = false;
+                } 
+                gym = createGym(gymName, exGym);
+            } 
             Raid raid = new Raid(gym, level, hours, minutes);
             raidDao.create(raid);
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }       
         return true;
@@ -109,8 +118,7 @@ public class RaidService {
           
         try {
             return raidDao.getAll(); 
-        } catch (SQLException ex) {
-            Logger.getLogger(RaidService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
         }
         return null;
     }
@@ -139,7 +147,6 @@ public class RaidService {
                 text += gyms.get(i).toString();
             }
         } catch (Exception e) {
-            System.out.println(e);
             return null;
         }
               
@@ -159,7 +166,6 @@ public class RaidService {
             User u = userDao.findByUsername(username);
             return true;
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }
     }
@@ -204,14 +210,16 @@ public class RaidService {
     * @param gymName name of the gym in String
     * @return Gym object
     */
-    public Gym getGym(String gymName) {
+    public boolean getGym(String gymName) {
         try {
             Gym gym = gymDao.findByGymName(gymName);
-            return gym;
+            if (gym.equals(null)){
+                return false;
+            }
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            return false;
         }
+        return true;
     }
     
     /**

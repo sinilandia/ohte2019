@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -32,6 +33,7 @@ public class uiApplication extends Application {
     
     private Label menuLabel;
     private VBox raidNodes;
+    private String username;
 
     @Override
     public void init() {
@@ -58,8 +60,7 @@ public class uiApplication extends Application {
         return hbox;
     }  
     
-    public void redrawActiveRaids() {
-        
+    public void redrawActiveRaids() {       
         raidNodes.getChildren().clear();      
         List<Raid> allRaids = raidService.findUpcomingRaids(); 
         allRaids.forEach(raid -> {
@@ -98,37 +99,57 @@ public class uiApplication extends Application {
         TextField gymNameInput = new TextField();       
         gymPane.getChildren().addAll(gymLabel, gymNameInput);
         
+        //user chooses if the gym is an EX Gym
+        HBox exPane = new HBox(10);
+        Label exLabel = new Label("Is it an EX Gym? Yes/No");
+        ChoiceBox exBox = new ChoiceBox();
+        exBox.getItems().add("Yes");
+        exBox.getItems().add("No");
+        exPane.getChildren().addAll(exLabel, exBox);
+        
         //user input for raid level
         HBox levelPane = new HBox(10);
         Label levelLabel = new Label("Raid level:");
         TextField levelInput = new TextField();
         levelPane.getChildren().addAll(levelLabel, levelInput);
         
-        //user input for starting time
-        HBox timePane = new HBox(10);
-        Label timeLabel = new Label("Start time:");
-        TextField timeInput = new TextField();
-        timePane.getChildren().addAll(timeLabel, timeInput);
+        //user input for starting time in hours and minutes
+        HBox hoursPane = new HBox(10);
+        Label hoursLabel = new Label("Start time in hours:");
+        TextField hoursInput = new TextField();
+        hoursPane.getChildren().addAll(hoursLabel, hoursInput);
+        HBox minutesPane = new HBox(10);
+        Label minutesLabel = new Label("Start time in minutes:");
+        TextField minutesInput = new TextField(); 
+        minutesPane.getChildren().addAll(minutesLabel, minutesInput);       
         
         //add raid Button
         Button addRaidButton = new Button("Add raid");
-//        addRaidButton.setOnAction(e->{
-//            String username = usernameInput.getText();
-//            menuLabel.setText("Welcome, " + username);
-//            if ( raidService.login(username) ){
-//                loginMessage.setText("");           
-//                primaryStage.setScene(signUpForRaidScene);  
-//                usernameInput.setText(""); 
-//                redrawActiveRaids();
-//            } else {
-//                loginMessage.setText("player does not exist");
-//                loginMessage.setTextFill(Color.RED);
-//            }      
-//        });  
+        addRaidButton.setOnAction(e->{
+                String gymName = gymNameInput.getText();
+                String ex = (String) exBox.getValue();
+                String level = levelInput.getText();
+                String hours = hoursInput.getText();
+                String minutes = minutesInput.getText();
+                
+                if (raidService.createRaid(gymName, ex, level, hours, minutes)) {
+                    menuLabel.setText("Raid created succesfully!");
+                    menuLabel.setTextFill(Color.BLACK);
+                } else {
+                    menuLabel.setText("Raid info was incorrect. Raid not created.");
+                    menuLabel.setTextFill(Color.RED);
+                }
+        });  
         
-        createRaidPane.getChildren().addAll(gymPane, levelPane, timePane, addRaidButton);  
+        createRaidPane.getChildren().addAll(gymPane, exPane, levelPane, 
+                hoursPane, minutesPane, addRaidButton);  
         raidNodes.getChildren().clear();
         raidNodes.getChildren().addAll(createRaidPane);
+    }
+    
+    public void setMenuLabel() {
+        menuLabel.setText("Welcome, " + username);
+        menuLabel.setTextFill(Color.BLACK);
     }
      
     @Override
@@ -148,8 +169,8 @@ public class uiApplication extends Application {
         Button loginButton = new Button("login");
         Button createButton = new Button("create new user");
         loginButton.setOnAction(e->{
-            String username = usernameInput.getText();
-            menuLabel.setText("Welcome, " + username);
+            this.username = usernameInput.getText();
+            setMenuLabel();
             if ( raidService.login(username) ){
                 loginMessage.setText("");           
                 primaryStage.setScene(signUpForRaidScene);  
@@ -201,25 +222,25 @@ public class uiApplication extends Application {
         signUpForRaidScene = new Scene(layout, 500, 400);
               
         //click button My Raids
-        myRaidsButton.setOnAction(e->{    
+        myRaidsButton.setOnAction(e->{  
+            setMenuLabel();
             drawUsersRaids();
         });  
               
         //click button Sign Up For Raid
-        signUpButton.setOnAction(e->{    
+        signUpButton.setOnAction(e->{  
+            setMenuLabel();
             redrawActiveRaids();
         });
             
         //click createRaidButton
-        createRaidButton.setOnAction(e->{    
+        createRaidButton.setOnAction(e->{ 
+            setMenuLabel();
             createRaid();
         });  
-              
 
-        
-        
         // setup primary stage
-        
+        layout.setBottom(menuLabel);
         primaryStage.setTitle("Did I Raid That?");
         primaryStage.setScene(loginScene);
         primaryStage.show();
