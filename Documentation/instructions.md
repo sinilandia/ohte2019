@@ -1,10 +1,10 @@
 # Instructions
 
-Download file [Didiraidthat.jar]() ADD LINK!!!
+Download file [Didiraidthat.jar](https://github.com/sinilandia/ohte2019/releases/tag/loppupalautus).
 
 ## Configuration
 
-The application assumes that there is a file _config.properties_, that does what?
+The application assumes that there's raid.db database in the package.
 
 ```
 raid.db
@@ -17,14 +17,17 @@ Run by typing in the command
 ```
 java -jar todoapp.jar
 ```
+Or with Netbeans by clicking the green arrow Run > uiApplication.java.
 
 ## Logging in
 
 The application will start from login view:
 
-<img src="" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/login.png" width="200"> 
 
-Write in your username and click _login_ button.
+To log in: write in your username and click _login_ button.
+
+Create a new user: write in your username and click _create new user_ button.
 
 ## Create a new user
 
