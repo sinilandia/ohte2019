@@ -21,6 +21,19 @@ public class FileRaidDao implements RaidDao {
         this.gymDao = new FileGymDao(database);
     } 
     
+    //delete raids that are older than 2weeks
+//    public void deleteOldRaids() {
+//        try {
+//            Connection conn = db.getConnection();       
+//            PreparedStatement stmt = conn.prepareStatement("SELECT date FROM Raid "
+//                    + "WHERE date < 'now', '-1 day'");           
+//            ResultSet rs = stmt.executeQuery();        
+//            stmt.close();
+//            conn.close();
+//        } catch (Exception e) {           
+//        }
+//    }
+    
     @Override
     public boolean create(Raid raid) throws Exception {
         Connection conn = db.getConnection();
@@ -36,6 +49,7 @@ public class FileRaidDao implements RaidDao {
 
         return true;
     }
+    
     
     @Override
     public Raid findRaidById(int raidId) {

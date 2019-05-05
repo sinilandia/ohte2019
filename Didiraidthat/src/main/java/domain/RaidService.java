@@ -214,6 +214,26 @@ public class RaidService {
     }
     
     /**
+    * Find active raids that the user can sign up to
+    * @return list of user's raids
+    */
+    public List<Raid> findActiveRaids() {
+        
+        // etsi tulevat raidit SELECT * FROM Raid WHERE date = date.now() ja time > time.now()
+        
+        List<Integer> usersRaidsId = raidUserDao.findUsersRaids(loggedIn.getId());
+        
+        List<Raid> usersRaids = new ArrayList<>();
+        for (int i = 0; i < usersRaidsId.size(); i++) {
+            int raidId = usersRaidsId.get(i);
+            Raid raid = raidDao.findRaidById(raidId);
+            usersRaids.add(raid);           
+        }
+        
+        return usersRaids;
+    }
+    
+    /**
     * Get user's raids with user id
     * @return list of user's raids
     */

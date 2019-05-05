@@ -54,13 +54,33 @@ public class uiApplication extends Application {
         
         hbox.getChildren().addAll(label, spacer, button);
         return hbox;
-    }
+    }  
     
     public void redrawActiveRaids() {
+        
         raidNodes.getChildren().clear();      
         List<Raid> allRaids = raidService.findUsersRaids();
         allRaids.forEach(raid -> {
             raidNodes.getChildren().add(createRaidNode(raid));
+        }); 
+    }
+    
+    public Node createUsersRaidNode(Raid raid) {
+        HBox hbox = new HBox(10);
+        Label label  = new Label(raid.toString());
+        label.setMinHeight(90);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        hbox.setPadding(new Insets(5,5,5,5));        
+        hbox.getChildren().addAll(label, spacer);
+        return hbox;
+    }  
+    
+    public void drawUsersRaids() {       
+        raidNodes.getChildren().clear();      
+        List<Raid> allRaids = raidService.findUsersRaids();
+        allRaids.forEach(raid -> {
+            raidNodes.getChildren().add(createUsersRaidNode(raid));
         }); 
     }
     
@@ -110,7 +130,7 @@ public class uiApplication extends Application {
         loginScene = new Scene(loginPane, 300, 250);    
         
         
-        // new signUpForRaidScene 
+        // menu bar for buttons in after login scene
         BorderPane layout = new BorderPane();
         //menubar
         Button signUpButton = new Button("Sign up for a raid");
@@ -120,8 +140,9 @@ public class uiApplication extends Application {
         menubar.setPadding(new Insets(20, 20, 20, 20));
         menubar.setSpacing(10);
         menubar.getChildren().addAll(signUpButton, createRaidButton, myRaidsButton);
-        layout.setTop(menubar);
-        //active raids
+        layout.setTop(menubar);      
+        
+        //Sign up for raids Scene: active raids
         raidNodes = new VBox(10);
         raidNodes.setMaxWidth(500);
         raidNodes.setMaxHeight(350);
@@ -131,6 +152,18 @@ public class uiApplication extends Application {
         layout.setCenter(raidScrollbar);
         
         signUpForRaidScene = new Scene(layout, 500, 400);
+        
+        
+        // My raids Scene: shows user's raids, both past and present       
+        //click button My Raids
+        myRaidsButton.setOnAction(e->{    
+            drawUsersRaids();
+        });  
+              
+        //click button Sign Up For Raid
+        signUpButton.setOnAction(e->{    
+            redrawActiveRaids();
+        });
         
         
         // setup primary stage
