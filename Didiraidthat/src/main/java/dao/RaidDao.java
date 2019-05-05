@@ -19,6 +19,6 @@ public interface RaidDao {
     
     Raid findRaidById(int raidId);
     
-    List<Raid> getAll() throws SQLException;
+    List<Raid> getAll();
     
 }

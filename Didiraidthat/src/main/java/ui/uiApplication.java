@@ -47,11 +47,20 @@ public class uiApplication extends Application {
         label.setMinHeight(90);
         Button button = new Button("Sign up");
         button.setOnAction(e->{
-            raidService.signUpForRaid(raid.getId());
-            redrawActiveRaids();
-            button.setText("GOING"); //need to test later
-            button.setDisable(true); //need to test later
+            raidService.signUpForRaid(raid.getId());           
+            button.setText("GOING"); 
+            button.setDisable(true); 
         });
+               
+        //disable button jos raid löytyy userin raideista
+        List<Raid> usersRaids = raidService.findUsersRaids();
+        for (int i = 0; i < usersRaids.size(); i++) {
+            if (raid.getId()==usersRaids.get(i).getId()) {
+                button.setText("GOING"); 
+                button.setDisable(true); 
+            }
+        }
+                
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         hbox.setPadding(new Insets(5,5,5,5));

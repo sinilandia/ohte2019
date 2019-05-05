@@ -9,6 +9,7 @@ import java.util.Scanner;
 import domain.Gym;
 import java.sql.*;
 import java.text.SimpleDateFormat;  
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -75,36 +76,12 @@ public class FileRaidDao implements RaidDao {
     }
 
     @Override
-    public List<Raid> getAll() throws SQLException {
+    public List<Raid> getAll() {
         ArrayList raids = new ArrayList();
-        Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
-                + "ORDER BY id DESC");       
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()) {
-            int gymId = rs.getInt("gym_id");
-            Gym gym = gymDao.findbyGymId(gymId);
-            Raid r = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
-                    rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
-            raids.add(r);
-        }       
-        
-        stmt.close();
-        rs.close();
-        conn.close();
-        
-        return raids;
-    }
-    
-    public List<Raid> findActiveRaids() {
-        ArrayList activeRaids = new ArrayList();
         
         try {
             Connection conn = db.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
-                    + "WHERE date = date('now') "
-                    + "AND WHERE time > time('now') "
                     + "ORDER BY id DESC");       
             ResultSet rs = stmt.executeQuery();
 
@@ -113,14 +90,49 @@ public class FileRaidDao implements RaidDao {
                 Gym gym = gymDao.findbyGymId(gymId);
                 Raid r = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
                         rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
-                activeRaids.add(r);
+                raids.add(r);
             }       
 
             stmt.close();
             rs.close();
-            conn.close();   
+            conn.close();
         } catch (Exception e) {           
+        }      
+        return raids;
+    }
+    
+    public List<Raid> findActiveRaids() {
+        List<Raid> activeRaids = new ArrayList<>();
+        List<Raid> allRaids = getAll();
+        
+        for (int i = 0; i < allRaids.size(); i++) {
+            Raid raid = allRaids.get(i);
+            if (raid.getDate().equals(LocalDate.now())) {
+                activeRaids.add(raid);
+            }
         }
+        
+//        try {
+//            Connection conn = db.getConnection();
+//            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
+//                    + "WHERE date = date('now') "
+//                    + "AND WHERE time > time('now') "
+//                    + "ORDER BY id DESC");       
+//            ResultSet rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//                int gymId = rs.getInt("gym_id");
+//                Gym gym = gymDao.findbyGymId(gymId);
+//                Raid r = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
+//                        rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
+//                activeRaids.add(r);
+//            }       
+//
+//            stmt.close();
+//            rs.close();
+//            conn.close();   
+//        } catch (Exception e) {           
+//        }
         return activeRaids;
     }
 }
