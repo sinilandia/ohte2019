@@ -1,6 +1,5 @@
 package ui;
 
-import domain.Gym;
 import domain.RaidService;
 import domain.Raid;
 import java.util.List;
@@ -115,17 +114,17 @@ public class uiApplication extends Application {
         
         //user input for raid level
         HBox levelPane = new HBox(10);
-        Label levelLabel = new Label("Raid level:");
+        Label levelLabel = new Label("Raid level (1-5):");
         TextField levelInput = new TextField();
         levelPane.getChildren().addAll(levelLabel, levelInput);
         
         //user input for starting time in hours and minutes
         HBox hoursPane = new HBox(10);
-        Label hoursLabel = new Label("Start time in hours:");
+        Label hoursLabel = new Label("Start time in hours (HH):");
         TextField hoursInput = new TextField();
         hoursPane.getChildren().addAll(hoursLabel, hoursInput);
         HBox minutesPane = new HBox(10);
-        Label minutesLabel = new Label("Start time in minutes:");
+        Label minutesLabel = new Label("Start time in minutes (mm):");
         TextField minutesInput = new TextField(); 
         minutesPane.getChildren().addAll(minutesLabel, minutesInput);       
         
@@ -138,12 +137,27 @@ public class uiApplication extends Application {
                 String hours = hoursInput.getText();
                 String minutes = minutesInput.getText();
                 
-                if (raidService.createRaid(gymName, ex, level, hours, minutes)) {
-                    menuLabel.setText("Raid created succesfully!");
-                    menuLabel.setTextFill(Color.BLACK);
-                } else {
-                    menuLabel.setText("Raid info was incorrect. Raid not created.");
+                if (gymName.length() > 15) {
+                    menuLabel.setText("Gym name too long. Name can be max 15 characters.");  
                     menuLabel.setTextFill(Color.RED);
+                } else if (level.length() > 2 || 
+                        !(level.equals("1") || 
+                        level.equals("2") ||
+                        level.equals("3") ||
+                        level.equals("4") ||
+                        level.equals("5") ||
+                        level.equals("EX"))) {
+                    menuLabel.setText("Level can be 1-5 or EX.");
+                    menuLabel.setTextFill(Color.RED);
+                } else {                
+                    if (raidService.createRaid(gymName, ex, level, hours, minutes)) {
+                        menuLabel.setText("Raid created succesfully!");
+                        menuLabel.setTextFill(Color.BLACK);
+                    } else {
+                        menuLabel.setText("Raid info was incorrect. Raid not created.");
+                        menuLabel.setTextFill(Color.RED);
+                    }
+                    
                 }
         });  
         
@@ -254,8 +268,7 @@ public class uiApplication extends Application {
     
     @Override
     public void stop() {
-      // stop stuff?
-      System.out.println("Goodbye.");
+        //Goodbye hooman!
     }    
     
     public static void main(String[] args) {

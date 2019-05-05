@@ -107,32 +107,12 @@ public class FileRaidDao implements RaidDao {
         
         for (int i = 0; i < allRaids.size(); i++) {
             Raid raid = allRaids.get(i);
-            if (raid.getDate().equals(LocalDate.now())) {
+            int compare = raid.getTime().compareTo(LocalTime.now());                    
+            if (raid.getDate().equals(LocalDate.now()) && compare >= 0) {
                 activeRaids.add(raid);
             }
         }
         
-//        try {
-//            Connection conn = db.getConnection();
-//            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
-//                    + "WHERE date = date('now') "
-//                    + "AND WHERE time > time('now') "
-//                    + "ORDER BY id DESC");       
-//            ResultSet rs = stmt.executeQuery();
-//
-//            while (rs.next()) {
-//                int gymId = rs.getInt("gym_id");
-//                Gym gym = gymDao.findbyGymId(gymId);
-//                Raid r = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
-//                        rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
-//                activeRaids.add(r);
-//            }       
-//
-//            stmt.close();
-//            rs.close();
-//            conn.close();   
-//        } catch (Exception e) {           
-//        }
         return activeRaids;
     }
 }

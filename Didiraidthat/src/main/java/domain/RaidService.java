@@ -79,7 +79,6 @@ public class RaidService {
     
     public boolean createRaid(String gymName, String ex, String level, String hours, String minutes) {       
         boolean exGym = true;
-        System.out.println(exGym);
         try {  
             Gym gym = gymDao.findByGymName(gymName);
             if (gym==null) {
@@ -133,12 +132,6 @@ public class RaidService {
     //NB: now returning all EX Gyms where the user has raided
     
     public String getAllGyms() {
-    //        if (loggedIn == null) {
-    //            return new ArrayList<>();
-    //        }
-
-        //LocalDate now = LocalDate.now();
-            
         String text = "";
         
         try {
