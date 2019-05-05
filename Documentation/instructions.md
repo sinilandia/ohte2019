@@ -34,11 +34,11 @@ Create a new user: write in your username and click _create new user_ button. Th
 
 Once logged in, you'll be able to view all of your raids that you have attended.
 
-<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/usersRaids.png" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/usersRaids.png" width="600">
 
 ## Creating new raids
 
 Once logged in, you'll be able to create new raids.
 
-<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/createRaid.png" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/createRaid.png" width="600"> 
 
