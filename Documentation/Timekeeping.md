@@ -27,6 +27,7 @@
 | 1.5   | 2.15 | Added javafx graphical ui for logging in and creating a new user, _uiApplication_ class. |
 | 2.5   | 2.5  | Created a new scene for displaying active raids that the user can sign up for. Should display all raids at this point but for some reason it returns an empty ArrayList or thinks that the loggedin user is null. Fixed it, I'd forgotten to call redrawActiveRaids() method.|
 | 3.5   | 0.15 | Designed how Raid Nodes are showed in the application. Now it looks clearer. |
-| 00.0  | 0.0  | N/A |
-| **total** | **47.75** | | 
+| 4.5   | 2.5  | Debugging why showing upcoming raids -scene wasn't working. I'd been debugging it for 2h already, writing new classes and printing out text trying to figure out where the problem was. Finally I had to ask my friend for help and he showed me debugger. My life was changed. He found the problem in less than 5min without having any idea what my code did. |
+| 5.5   | 7.5  | I did what I could before the deadline. Adding new scenes, some error handling for user inputs (asked my boyfriend to test it because he has no clue what Pokemon Go is), made the logic better, cleaned up code and wrote some documentation.|
+| **total** | **57.15** | | 
 
