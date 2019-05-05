@@ -102,6 +102,7 @@ Create new raid
 
 
 ## Vulnerabilities in the application and ideas for the future
+- checking for user input correctness, now this is for most inputs but I'm sure it can be done more efficiently
 - deleting old raids and only keeping raids from past 2 weeks
 - if keeping all time raid data, then drawing graphs of user's raid activity amount of raids vs. months
 - streamlining DAO-classes
