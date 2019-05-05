@@ -23,7 +23,7 @@ Or with Netbeans by clicking the green arrow Run > uiApplication.java.
 
 The application will start from login view:
 
-<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/login.png" width="200"> 
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/login.png" width="350"> 
 
 To log in: write in your username and click _login_ button.
 
