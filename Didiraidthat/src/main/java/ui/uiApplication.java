@@ -47,8 +47,8 @@ public class uiApplication extends Application {
         button.setOnAction(e->{
             raidService.signUpForRaid(raid.getId());
             redrawActiveRaids();
-            button.setText("GOING");
-            button.setDisable(true);
+            button.setText("GOING"); //need to test later
+            button.setDisable(true); //need to test later
         });
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -67,6 +67,7 @@ public class uiApplication extends Application {
         }); 
     }
     
+    // My raids Scene: create raid Node without signUpForRaidButton 
     public Node createUsersRaidNode(Raid raid) {
         HBox hbox = new HBox(10);
         Label label  = new Label(raid.toString());
@@ -78,6 +79,7 @@ public class uiApplication extends Application {
         return hbox;
     }  
     
+    // My raids Scene: shows user's raids, both past and present 
     public void drawUsersRaids() {       
         raidNodes.getChildren().clear();      
         List<Raid> allRaids = raidService.findUsersRaids();
@@ -86,6 +88,49 @@ public class uiApplication extends Application {
         }); 
     }
     
+    public void createRaid() {
+        VBox createRaidPane = new VBox(10);
+        createRaidPane.setPadding(new Insets(10));
+        
+        //user input for Gym name
+        HBox gymPane = new HBox(10);       
+        Label gymLabel = new Label("Gym name:");
+        TextField gymNameInput = new TextField();       
+        gymPane.getChildren().addAll(gymLabel, gymNameInput);
+        
+        //user input for raid level
+        HBox levelPane = new HBox(10);
+        Label levelLabel = new Label("Raid level:");
+        TextField levelInput = new TextField();
+        levelPane.getChildren().addAll(levelLabel, levelInput);
+        
+        //user input for starting time
+        HBox timePane = new HBox(10);
+        Label timeLabel = new Label("Start time:");
+        TextField timeInput = new TextField();
+        timePane.getChildren().addAll(timeLabel, timeInput);
+        
+        //add raid Button
+        Button addRaidButton = new Button("Add raid");
+//        addRaidButton.setOnAction(e->{
+//            String username = usernameInput.getText();
+//            menuLabel.setText("Welcome, " + username);
+//            if ( raidService.login(username) ){
+//                loginMessage.setText("");           
+//                primaryStage.setScene(signUpForRaidScene);  
+//                usernameInput.setText(""); 
+//                redrawActiveRaids();
+//            } else {
+//                loginMessage.setText("player does not exist");
+//                loginMessage.setTextFill(Color.RED);
+//            }      
+//        });  
+        
+        createRaidPane.getChildren().addAll(gymPane, levelPane, timePane, addRaidButton);  
+        raidNodes.getChildren().clear();
+        raidNodes.getChildren().addAll(createRaidPane);
+    }
+     
     @Override
     public void start(Stage primaryStage) {  
         
@@ -154,9 +199,7 @@ public class uiApplication extends Application {
         layout.setCenter(raidScrollbar);
         
         signUpForRaidScene = new Scene(layout, 500, 400);
-        
-        
-        // My raids Scene: shows user's raids, both past and present       
+              
         //click button My Raids
         myRaidsButton.setOnAction(e->{    
             drawUsersRaids();
@@ -166,6 +209,13 @@ public class uiApplication extends Application {
         signUpButton.setOnAction(e->{    
             redrawActiveRaids();
         });
+            
+        //click createRaidButton
+        createRaidButton.setOnAction(e->{    
+            createRaid();
+        });  
+              
+
         
         
         // setup primary stage
