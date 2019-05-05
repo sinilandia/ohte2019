@@ -56,7 +56,4 @@ public class User {
     public String toString() {
         return "Username: " + username + "\t id: " + id + "\n";
     }
-    
-    
-    
 }

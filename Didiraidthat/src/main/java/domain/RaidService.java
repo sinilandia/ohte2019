@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.util.function.Function;
-import java.util.Scanner;
-import java.sql.*;
-import java.util.Collections;
+
 
 /**
  * Application logic class
@@ -23,13 +18,6 @@ public class RaidService {
     private UserDao userDao;
     private RaidUserDao raidUserDao;
     private User loggedIn;
-    
-    /**
-     *
-     * @param gymDao
-     * @param raidDao
-     * @param userDao
-     */
     
     public RaidService() {
         try {     
@@ -93,15 +81,6 @@ public class RaidService {
             return false;
         }       
         return true;
-        
-        
-//        Raid raid = new Raid(gym, level, hours, minutes);
-//        try {   
-//            raidDao.create(raid);
-//        } catch (Exception ex) {
-//            return false;
-//        }
-//        return true;
     }
     
     /**
@@ -124,12 +103,10 @@ public class RaidService {
    
 
     /**
-    * Atm fetches all gyms, future: fetches all gyms where the user is eligible for an EX Raid
+    * Fetches all gyms
     * 
-    * @return EX gyms where the user has raided in the past 2 weeks
+    * @return all gyms
     */
-    
-    //NB: now returning all EX Gyms where the user has raided
     
     public String getAllGyms() {
         String text = "";
@@ -199,7 +176,7 @@ public class RaidService {
     }
     
     /**
-    * Get gym with its name, case sensitive maybe?
+    * Get gym with its name
     * @param gymName name of the gym in String
     * @return Gym object
     */
@@ -247,6 +224,4 @@ public class RaidService {
         List<Raid> upcomingRaids = raidDao.findActiveRaids(); 
         return upcomingRaids;
     }
-    
-   
 }    

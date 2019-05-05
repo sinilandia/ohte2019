@@ -62,16 +62,6 @@ public class FileRaidUserDao implements RaidUserDao {
     
     @Override
     public List<Gym> findUsersGyms(int userId) {
-//        
-//        List<Gym> usersGyms = new ArrayList();
-//        List<Integer> usersRaids = findUsersRaids(userId);
-//        
-//        for (int i = 0; i < usersRaids.size(); i++) {
-//            Gym gym = usersRaids.get(i).getGym();
-//            usersGyms.add(gym);
-//        }
-//        
-//        return usersGyms;
           return null;
     }
 }
