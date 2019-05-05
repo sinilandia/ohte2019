@@ -45,6 +45,41 @@ _RaidDao_ references _GymDao_ since each Raid happens at one specific Gym.
 
 _RaidUserDao_ keeps tabs on user's raids.
 
+To view SQL data, first download [sqlite](https://www.sqlite.org/index.html), then open the file _raid.db_ in terminal:
+```
+sqlite3 raid.db
+```
+The create table commands can be accessed with the command:
+```
+.schema
+```
+CREATE TABLE User (
+id integer PRIMARY KEY,
+username varchar(15)
+);
+
+CREATE TABLE Gym (
+id integer PRIMARY KEY,
+name varchar(15),
+ex boolean
+);
+
+CREATE TABLE RaidUser (
+    raid_id integer,
+    user_id integer,
+    FOREIGN KEY (raid_id) REFERENCES Raid(id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+CREATE TABLE Raid (
+   id integer PRIMARY KEY,
+   gym_id integer,
+   level varchar(2),
+   date date,
+   time time,
+   FOREIGN KEY (gym_id) References Gym(id)
+);
+
 
 ### Main functions
 
@@ -58,11 +93,11 @@ Create new user button > type in name & create button
 
 #### Creating a new gym 
 
-process
+Create new gym
 
 #### Creating a new raid
 
-process
+Create new raid
 
 
 
