@@ -36,7 +36,7 @@ public class FileRaidUserDao implements RaidUserDao {
   
     @Override
     public List<Integer> findUsersRaids(int userId) {
-        List usersRaids = new ArrayList<>();
+        List usersRaids = new ArrayList<>();  
         
         try {
             Connection conn = db.getConnection();
@@ -62,6 +62,6 @@ public class FileRaidUserDao implements RaidUserDao {
     
     @Override
     public List<Gym> findUsersGyms(int userId) {
-          return null;
+        return null;
     }
 }

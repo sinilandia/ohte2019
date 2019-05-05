@@ -42,7 +42,7 @@ public class uiApplication extends Application {
         Label label  = new Label(raid.toString());
         label.setMinHeight(90);
         Button button = new Button("Sign up");
-        button.setOnAction(e->{
+        button.setOnAction(e-> {
             raidService.signUpForRaid(raid.getId());           
             button.setText("GOING"); 
             button.setDisable(true); 
@@ -51,7 +51,7 @@ public class uiApplication extends Application {
         //disable button if user has already signed up for the raid
         List<Raid> usersRaids = raidService.findUsersRaids();
         for (int i = 0; i < usersRaids.size(); i++) {
-            if (raid.getId()==usersRaids.get(i).getId()) {
+            if (raid.getId() == usersRaids.get(i).getId()) {
                 button.setText("GOING"); 
                 button.setDisable(true); 
             }
@@ -59,7 +59,7 @@ public class uiApplication extends Application {
                 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        hbox.setPadding(new Insets(5,5,5,5));
+        hbox.setPadding(new Insets(5, 5, 5, 5));
         
         hbox.getChildren().addAll(label, spacer, button);
         return hbox;
@@ -80,7 +80,7 @@ public class uiApplication extends Application {
         label.setMinHeight(90);
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        hbox.setPadding(new Insets(5,5,5,5));   
+        hbox.setPadding(new Insets(5, 5, 5, 5));   
         hbox.getChildren().addAll(label, spacer);
         return hbox;
     }  
@@ -130,35 +130,35 @@ public class uiApplication extends Application {
         
         //add raid Button
         Button addRaidButton = new Button("Add raid");
-        addRaidButton.setOnAction(e->{
-                String gymName = gymNameInput.getText();
-                String ex = (String) exBox.getValue();
-                String level = levelInput.getText();
-                String hours = hoursInput.getText();
-                String minutes = minutesInput.getText();
-                
-                if (gymName.length() > 15) {
-                    menuLabel.setText("Gym name too long. Name can be max 15 characters.");  
+        addRaidButton.setOnAction(e-> {
+            String gymName = gymNameInput.getText();
+            String ex = (String) exBox.getValue();
+            String level = levelInput.getText();
+            String hours = hoursInput.getText();
+            String minutes = minutesInput.getText();
+
+            if (gymName.length() > 15) {
+                menuLabel.setText("Gym name too long. Name can be max 15 characters.");  
+                menuLabel.setTextFill(Color.RED);
+            } else if (level.length() > 2 || 
+                    !(level.equals("1") || 
+                    level.equals("2") ||
+                    level.equals("3") ||
+                    level.equals("4") ||
+                    level.equals("5") ||
+                    level.equals("EX"))) {
+                menuLabel.setText("Level can be 1-5 or EX.");
+                menuLabel.setTextFill(Color.RED);
+            } else {                
+                if (raidService.createRaid(gymName, ex, level, hours, minutes)) {
+                    menuLabel.setText("Raid created succesfully!");
+                    menuLabel.setTextFill(Color.BLACK);
+                } else {
+                    menuLabel.setText("Raid info was incorrect. Raid not created.");
                     menuLabel.setTextFill(Color.RED);
-                } else if (level.length() > 2 || 
-                        !(level.equals("1") || 
-                        level.equals("2") ||
-                        level.equals("3") ||
-                        level.equals("4") ||
-                        level.equals("5") ||
-                        level.equals("EX"))) {
-                    menuLabel.setText("Level can be 1-5 or EX.");
-                    menuLabel.setTextFill(Color.RED);
-                } else {                
-                    if (raidService.createRaid(gymName, ex, level, hours, minutes)) {
-                        menuLabel.setText("Raid created succesfully!");
-                        menuLabel.setTextFill(Color.BLACK);
-                    } else {
-                        menuLabel.setText("Raid info was incorrect. Raid not created.");
-                        menuLabel.setTextFill(Color.RED);
-                    }
-                    
                 }
+
+            }
         });  
         
         createRaidPane.getChildren().addAll(gymPane, exPane, levelPane, 
@@ -188,25 +188,25 @@ public class uiApplication extends Application {
         
         Button loginButton = new Button("login");
         Button createButton = new Button("create new user");
-        loginButton.setOnAction(e->{
+        loginButton.setOnAction(e-> {
             this.username = usernameInput.getText();
             setMenuLabel();
-            if ( raidService.login(username) ){
+            if (raidService.login(username)) {
                 loginMessage.setText("");           
                 primaryStage.setScene(signUpForRaidScene);  
                 usernameInput.setText(""); 
                 redrawActiveRaids();
             } else {
-                loginMessage.setText("player does not exist");
+                loginMessage.setText("user does not exist");
                 loginMessage.setTextFill(Color.RED);
             }      
         });  
         
-        createButton.setOnAction(e->{
+        createButton.setOnAction(e-> {
             if (raidService.addNewUser(usernameInput.getText())) {
-            loginMessage.setText("player " + usernameInput.getText() + " created");
-            loginMessage.setTextFill(Color.BLACK);
-            usernameInput.setText(""); 
+                loginMessage.setText("player " + usernameInput.getText() + " created");
+                loginMessage.setTextFill(Color.BLACK);
+                usernameInput.setText(""); 
             } else {
                 loginMessage.setText("couldn't create player");
                 loginMessage.setTextFill(Color.RED);
@@ -242,19 +242,19 @@ public class uiApplication extends Application {
         signUpForRaidScene = new Scene(layout, 500, 400);
               
         //click button My Raids
-        myRaidsButton.setOnAction(e->{  
+        myRaidsButton.setOnAction(e-> {  
             setMenuLabel();
             drawUsersRaids();
         });  
               
         //click button Sign Up For Raid
-        signUpButton.setOnAction(e->{  
+        signUpButton.setOnAction(e-> {  
             setMenuLabel();
             redrawActiveRaids();
         });
             
         //click createRaidButton
-        createRaidButton.setOnAction(e->{ 
+        createRaidButton.setOnAction(e-> { 
             setMenuLabel();
             createRaid();
         });  

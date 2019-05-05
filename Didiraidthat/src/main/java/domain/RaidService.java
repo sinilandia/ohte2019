@@ -69,7 +69,7 @@ public class RaidService {
         boolean exGym = true;
         try {  
             Gym gym = gymDao.findByGymName(gymName);
-            if (gym==null) {
+            if (gym == null) {
                 if (ex.equals("No")) {
                     exGym = false;
                 } 
@@ -183,7 +183,7 @@ public class RaidService {
     public boolean getGym(String gymName) {
         try {
             Gym gym = gymDao.findByGymName(gymName);
-            if (gym.equals(null)){
+            if (gym.equals(null)) {
                 return false;
             }
         } catch (Exception e) {
