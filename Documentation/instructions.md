@@ -1,10 +1,10 @@
 # Instructions
 
-Download file [Didiraidthat.jar]() ADD LINK!!!
+Download file [Didiraidthat.jar](https://github.com/sinilandia/ohte2019/releases/tag/loppupalautus).
 
 ## Configuration
 
-The application assumes that there is a file _config.properties_, that does what?
+The application assumes that there's raid.db database in the package.
 
 ```
 raid.db
@@ -17,36 +17,28 @@ Run by typing in the command
 ```
 java -jar todoapp.jar
 ```
+Or with Netbeans by clicking the green arrow Run > uiApplication.java.
 
-## Logging in
+## Logging in and creating a new user
 
 The application will start from login view:
 
-<img src="" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/login.png" width="350"> 
 
-Write in your username and click _login_ button.
+To log in: write in your username and click _login_ button.
 
-## Create a new user
+Create a new user: write in your username and click _create new user_ button. The program will prompt the user if new user creation was successful.
 
-If you wish to create a new user, click the button _create new user_ from login window.
 
-Write in the username and click button _create_.
+## Viewing user's raids
 
-<img src="" width="400"> ADD IMAGE
+Once logged in, you'll be able to view all of your raids that you have attended.
 
-If user was created succesfully, you will automatically return to login window.
-
-## Creating new gyms
-
-Once logged in, you'll be able to create new gyms.
-
-<img src="" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/usersRaids.png" width="600">
 
 ## Creating new raids
 
 Once logged in, you'll be able to create new raids.
 
-<img src="" width="400"> ADD IMAGE
+<img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/createRaid.png" width="600"> 
 
-## Logout
-Click the button _logout_. The user will be logged out and taken back to the login window.

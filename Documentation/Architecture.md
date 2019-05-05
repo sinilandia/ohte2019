@@ -10,41 +10,75 @@ Package _ui_ has a graphical interface with JavaFX, _domain_ application logic a
 
 ## Interface
 
-Interface has three windows:
-- login
-- creating a new raid
-- list view of ongoing raids
+The interface has four windows:
+- login window: log in with username or create a new user
+- after logging in: the user will see upcoming raids and is able to sign up for the raids
+- after logging in: the user can create new raids
+- after logging in: the user can view a list of his/her raids
+
+The interface has been created with JavaFX. Each button click will create a new view as a Scene object. 
 
 ## Application logic
 
-The logic behind the application consists of classes [User](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/User.java), [Gym](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/Gym.java) and [Raid](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/Raid.java). Here is a sequence diagram of how to create a new EX Gym:
+The logic behind the application consists of classes [User](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/User.java), [Gym](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/Gym.java) and [Raid](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/Raid.java). 
+
+Here is a sequence diagram of how to create a new EX Gym:
 
 <img src="https://github.com/sinilandia/ohte2019/blob/master/Documentation/kuvat/Create%20a%20new%20EX%20gym.png" width="800">
 
 To execute needed tasks, [RaidService](https://github.com/sinilandia/ohte2019/blob/master/Didiraidthat/src/main/java/domain/RaidService.java) object will be responsible for this. This is the class that links the ui with the other objects and data. Examples of functions are:
 - boolean login(String username)
 - User addNewUser()
-- Gym getGym(String gymName)
-- String getAllGyms() 
 - boolean createRaid()
+- List<Raid> findUpcomingRaids()
 
-_RaidService_ uses package _dao_ to access interfaces _RaidDao_, _UserDao_ and _GymDao_.  [Injection?](https://en.wikipedia.org/wiki/Dependency_injection)
+_RaidService_ uses package _dao_ to access interfaces _RaidDao_, _UserDao_, _GymDao_ and _RaidUserDao_. 
+
 
 ## Data and keeping it
 
-[Data Access Object](https://en.wikipedia.org/wiki/Data_access_object) - model is used to access and save information into the file _raid.db_. 
+[Data Access Object](https://en.wikipedia.org/wiki/Data_access_object) - model is used to access and save information into the file _raid.db_. The program uses _sqlite_ to store SQL data.
 
+_UserDao_ is an independent dao-object.
 
-### File
+_RaidDao_ references _GymDao_ since each Raid happens at one specific Gym.
 
-raid.db
-What is [config.properties](https://github.com/mluukkai/OtmTodoApp/blob/master/config.properties)?
+_RaidUserDao_ keeps tabs on user's raids.
 
-The format in which the data is saved is:
-example
-example
-example
+To view SQL data, first download [sqlite](https://www.sqlite.org/index.html), then open the file _raid.db_ in terminal:
+```
+sqlite3 raid.db
+```
+The create table commands can be accessed with the command:
+```
+.schema
+```
+CREATE TABLE User (
+id integer PRIMARY KEY,
+username varchar(15)
+);
 
+CREATE TABLE Gym (
+id integer PRIMARY KEY,
+name varchar(15),
+ex boolean
+);
+
+CREATE TABLE RaidUser (
+    raid_id integer,
+    user_id integer,
+    FOREIGN KEY (raid_id) REFERENCES Raid(id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+CREATE TABLE Raid (
+   id integer PRIMARY KEY,
+   gym_id integer,
+   level varchar(2),
+   date date,
+   time time,
+   FOREIGN KEY (gym_id) References Gym(id)
+);
 
 
 ### Main functions
@@ -59,23 +93,18 @@ Create new user button > type in name & create button
 
 #### Creating a new gym 
 
-process
+Create new gym
 
 #### Creating a new raid
 
-process
-
-#### Other functions
-
-what else?
+Create new raid
 
 
 
-## Vulnerabilities in the application
-
-### User interface
-
-
-### DAO classes
-
-Lots of non-DRY code.
+## Vulnerabilities in the application and ideas for the future
+- checking for user input correctness, currently this has been implemented for most inputs but I'm sure it can be done more efficiently
+- deleting old raids and only keeping raids from past 2 weeks
+- if keeping all time raid data, then drawing graphs of user's raid activity amount of raids vs. months
+- streamlining DAO-classes
+- refactoring the ui
+- showing user's EX Gyms, now the methods exist but this is not utilized in the ui
