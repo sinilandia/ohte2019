@@ -47,6 +47,8 @@ public class uiApplication extends Application {
         button.setOnAction(e->{
             raidService.signUpForRaid(raid.getId());
             redrawActiveRaids();
+            button.setText("GOING");
+            button.setDisable(true);
         });
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -59,7 +61,7 @@ public class uiApplication extends Application {
     public void redrawActiveRaids() {
         
         raidNodes.getChildren().clear();      
-        List<Raid> allRaids = raidService.findUsersRaids();
+        List<Raid> allRaids = raidService.findUpcomingRaids(); 
         allRaids.forEach(raid -> {
             raidNodes.getChildren().add(createRaidNode(raid));
         }); 
@@ -71,7 +73,7 @@ public class uiApplication extends Application {
         label.setMinHeight(90);
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        hbox.setPadding(new Insets(5,5,5,5));        
+        hbox.setPadding(new Insets(5,5,5,5));   
         hbox.getChildren().addAll(label, spacer);
         return hbox;
     }  

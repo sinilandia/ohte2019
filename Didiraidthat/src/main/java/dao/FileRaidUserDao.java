@@ -40,7 +40,9 @@ public class FileRaidUserDao implements RaidUserDao {
         
         try {
             Connection conn = db.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT raid_id FROM RaidUser WHERE user_id = ?");   
+            PreparedStatement stmt = conn.prepareStatement("SELECT raid_id FROM "
+                    + "RaidUser WHERE user_id = ? "
+                    + "ORDER BY raid_id DESC");   
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
 

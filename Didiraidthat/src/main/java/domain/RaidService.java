@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.function.Function;
 import java.util.Scanner;
 import java.sql.*;
+import java.util.Collections;
 
 /**
  * Application logic class
@@ -18,7 +19,7 @@ public class RaidService {
     
     private Database db;
     private GymDao gymDao;
-    private RaidDao raidDao;
+    private FileRaidDao raidDao;
     private UserDao userDao;
     private RaidUserDao raidUserDao;
     private User loggedIn;
@@ -214,32 +215,11 @@ public class RaidService {
     }
     
     /**
-    * Find active raids that the user can sign up to
-    * @return list of user's raids
-    */
-    public List<Raid> findActiveRaids() {
-        
-        // etsi tulevat raidit SELECT * FROM Raid WHERE date = date.now() ja time > time.now()
-        
-        List<Integer> usersRaidsId = raidUserDao.findUsersRaids(loggedIn.getId());
-        
-        List<Raid> usersRaids = new ArrayList<>();
-        for (int i = 0; i < usersRaidsId.size(); i++) {
-            int raidId = usersRaidsId.get(i);
-            Raid raid = raidDao.findRaidById(raidId);
-            usersRaids.add(raid);           
-        }
-        
-        return usersRaids;
-    }
-    
-    /**
     * Get user's raids with user id
     * @return list of user's raids
     */
     public List<Raid> findUsersRaids() {
         List<Integer> usersRaidsId = raidUserDao.findUsersRaids(loggedIn.getId());
-        //should return raids from past 2weeks
         
         List<Raid> usersRaids = new ArrayList<>();
         for (int i = 0; i < usersRaidsId.size(); i++) {
@@ -257,10 +237,15 @@ public class RaidService {
         }
         return false;
     }
-    
-    
-    
-    
+
+    /**
+    * Find active raids that the user can sign up to
+    * @return list of upcoming raids where starting time is later today
+    */
+    public List<Raid> findUpcomingRaids() {
+        List<Raid> upcomingRaids = raidDao.findActiveRaids(); 
+        return upcomingRaids;
+    }
     
    
 }    

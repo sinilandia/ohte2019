@@ -25,7 +25,7 @@ public class FileRaidDao implements RaidDao {
 //    public void deleteOldRaids() {
 //        try {
 //            Connection conn = db.getConnection();       
-//            PreparedStatement stmt = conn.prepareStatement("SELECT date FROM Raid "
+//            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
 //                    + "WHERE date < 'now', '-1 day'");           
 //            ResultSet rs = stmt.executeQuery();        
 //            stmt.close();
@@ -58,9 +58,7 @@ public class FileRaidDao implements RaidDao {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid WHERE id = ?"); 
             stmt.setInt(1, raidId);
             ResultSet rs = stmt.executeQuery();
-
-            //if-else: doesn't exist > return null;
-
+            
             int gymId = rs.getInt("gym_id");
             Gym gym = gymDao.findbyGymId(gymId);
 
@@ -80,7 +78,8 @@ public class FileRaidDao implements RaidDao {
     public List<Raid> getAll() throws SQLException {
         ArrayList raids = new ArrayList();
         Connection conn = db.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid order by id");       
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
+                + "ORDER BY id DESC");       
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()) {
@@ -97,59 +96,31 @@ public class FileRaidDao implements RaidDao {
         
         return raids;
     }
-}
+    
+    public List<Raid> findActiveRaids() {
+        ArrayList activeRaids = new ArrayList();
         
-    
-    
-//    public List<Raid> raids;
-//    private String file;
-//    
-//    public FileRaidDao(String file, GymDao gyms) throws Exception {
-//        raids = new ArrayList<>();
-//        this.file = file;
-//        try {
-//            Scanner reader = new Scanner(new File(file));
-//            while (reader.hasNextLine()) {
-//                String[] parts = reader.nextLine().split(";");
-//                int id = Integer.parseInt(parts[0]);
-//                Gym gym = gyms.getAll().stream().filter(g->g.getName().equals(parts[2])).findFirst().orElse(null);
-//                LocalDate date = LocalDate.parse(parts[3]);
-//                DateTimeFormatter parser = DateTimeFormatter.ofPattern("HH:mm");
-//                LocalTime time = LocalTime.parse(parts[4], parser);
-//
-//                //Raid: id, level, gym, date, time, boolean raided (need to be changed to arraylist later?)
-//                Raid raid = new Raid(id, gym, parts[1], date, time, Boolean.parseBoolean(parts[5]));
-//                raids.add(raid);
-//            }
-//        } catch (Exception e) {
-//            FileWriter writer = new FileWriter(new File(file));
-//            writer.close();
-//        }
-//        
-//    }
-//
-//    private int generateId() {
-//        return raids.size() + 1;
-//    }
-//    
-//    private void save() throws Exception {
-//        try (FileWriter writer = new FileWriter(new File(file))) {
-//            for (Raid raid : raids) {
-//                writer.write(raid.getId() + ";" + raid.getLevel() + ";" + raid.getDate() 
-//                         + ";" + raid.getTime() + ";" + raid.isRaided() + "\n");
-//            }
-//        }
-//    } 
-//    
-//    @Override
-//    public Raid create(Raid raid) throws Exception {
-//        raid.setId(generateId());
-//        raids.add(raid);
-//        save();
-//        return raid;    
-//    }
-//
-//    @Override
-//    public List<Raid> getAll() {
-//        return raids;
-//    }
+        try {
+            Connection conn = db.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raid "
+                    + "WHERE date = date('now') "
+                    + "AND WHERE time > time('now') "
+                    + "ORDER BY id DESC");       
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int gymId = rs.getInt("gym_id");
+                Gym gym = gymDao.findbyGymId(gymId);
+                Raid r = new Raid(rs.getInt("id"), gym, rs.getString("level"), 
+                        rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime());
+                activeRaids.add(r);
+            }       
+
+            stmt.close();
+            rs.close();
+            conn.close();   
+        } catch (Exception e) {           
+        }
+        return activeRaids;
+    }
+}
