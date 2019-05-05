@@ -3,9 +3,6 @@ package ui;
 import domain.Gym;
 import domain.RaidService;
 import domain.Raid;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -52,7 +49,7 @@ public class uiApplication extends Application {
             button.setDisable(true); 
         });
                
-        //disable button jos raid löytyy userin raideista
+        //disable button if user has already signed up for the raid
         List<Raid> usersRaids = raidService.findUsersRaids();
         for (int i = 0; i < usersRaids.size(); i++) {
             if (raid.getId()==usersRaids.get(i).getId()) {
